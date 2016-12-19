@@ -25,9 +25,7 @@ public class FlugEintragenServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	HttpSession session = request.getSession(true);
 
-        //String dataName = "C:\\Users\\Paul\\Documents\\Vorlesungen\\3. Semester\\SWE\\tomcat\\webapps\\skywings\\WEB-INF\\save\\saveflug.ser";
-        //String baseFlughafenPath = "C:\\Users\\Paul\\Documents\\Vorlesungen\\3. Semester\\SWE\\tomcat\\webapps\\skywings\\WEB-INF\\save\\flughafen\\";
-		String dataName = "../webapps/skywings/WEB-INF/save/saveflug";
+    	String dataName = "../webapps/skywings/WEB-INF/save/saveflug";
 		String baseFlughafenPath = "../webapps/skywings/WEB-INF/save/flughafen/";
         FlugDAO flugDAO = new SerializedFlugDAO(dataName);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
@@ -58,7 +56,7 @@ public class FlugEintragenServlet extends HttpServlet {
 		response.setContentType("text/html");
     }
 
-    private Flughafen flughafenFromFile(String basepath, String fcode) {
+    private Flughafen flughafenFromFile(String basepath, String fcode) throws IOException {
 		try {
 			FileReader fr = new FileReader(basepath + fcode + ".txt");
 			BufferedReader br = new BufferedReader(fr);
@@ -95,7 +93,8 @@ public class FlugEintragenServlet extends HttpServlet {
 		}
 		catch(IOException e) {
 			e.printStackTrace();
-			return new Flughafen("Fuck", "you", "SWE", "Project");
+			//return new Flughafen("N/A", "N/A", "N/A", "N/A");
+			throw e;
 		}
     }
 }
