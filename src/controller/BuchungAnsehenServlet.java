@@ -28,7 +28,7 @@ public class BuchungAnsehenServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("/WEB-INF/classes/view/fluglist.jsp").include(request, response);
+		request.getRequestDispatcher("/WEB-INF/classes/view/buchungansehen.jsp").include(request, response);
 		response.setContentType("text/html");
 	}
 
@@ -37,7 +37,7 @@ public class BuchungAnsehenServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.sendRedirect("/skywings/buchungansehen");
+		response.sendRedirect("/Skywings/buchungansehen");
 		response.setContentType("text/html");
 	}
 
