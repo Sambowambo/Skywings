@@ -31,7 +31,7 @@
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
 						Menu <i class="fa fa-bars"></i>
 					</button>
-					<a class="navbar-brand page-scroll" href="/skywings">
+					<a class="navbar-brand page-scroll" href="/Skywings">
 						<i class="fa fa-plane"></i> <span style="font-weight:bold">SKYWINGS</span> Prototyp I
 					</a>
 				</div>

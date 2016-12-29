@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.buchung.dao.BuchungDAO;
+import model.buchung.dao.SerializedBuchungDAO;
+
 /**
  * Servlet implementation class BuchungAnsehen
  */
@@ -37,7 +40,28 @@ public class BuchungAnsehenServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.sendRedirect("/Skywings/buchungansehen");
+		String buchungDataName = "../webapps/skywings/WEB-INF/save/savebuchung";
+		BuchungDAO bdao = new SerializedBuchungDAO(buchungDataName);
+		
+		
+		String tnr = "";
+		tnr = request.getParameter("tnr");
+		
+		String buchungnr = tnr.substring(0,tnr.length()-3);
+		
+		try {
+			int indexofticket = Integer.parseInt(tnr.substring(tnr.length()-3,tnr.length()));
+			
+			if(tnr.equals(bdao.getBuchungbyId(buchungnr).getTicket().get(indexofticket).getTicketnummer()))
+			{					
+				request.setAttribute("tnr", tnr);
+			}
+		}
+		catch (NumberFormatException|NullPointerException e) {
+			request.setAttribute("tnr", "Ticket nicht gefunden bitte kontrollieren Sie ihre Eingabe!"+System.getProperty("user.dir"));
+		}
+		
+		request.getRequestDispatcher("/WEB-INF/classes/view/buchungansehen.jsp").include(request, response);
 		response.setContentType("text/html");
 	}
 

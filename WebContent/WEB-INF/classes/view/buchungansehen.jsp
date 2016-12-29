@@ -24,14 +24,23 @@
 					</a>
 				</div>
 		</nav>
+		<% String tnr = (String)request.getAttribute("tnr"); %>
 		<div class="container">
+		<% if (tnr == null) { %>
 			<form class="search-booking" method="POST" >
 				<h2 class="booking-heading">Please enter your Ticketnumber</h2><br>
 				<label for="inputTicketnr" class="sr-only">Ticketnumber</label>
-				<input type="text" id="inputTicketnr" class="form-control" placeholder="Ticketnummer" name="j_tnumber" required autofocus>
-				
+				<input type="text" name ="tnr" id="inputTicketnr" class="form-control" placeholder="z.B. AB123#2016-12-12@12:35_001002" name="j_tnumber" required >
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Ansehen</button>
 			</form>
+			
+			<!-- this is just a test -->
+		<% } else { %> 
+			<div id="info-output">
+				Ticketnummer: <%= tnr %>
+			</div>
+		<% } %>
+			
 		</div>
 	</body>
 </html>

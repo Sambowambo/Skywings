@@ -17,7 +17,7 @@ import model.*;
 public class FlugEintragenServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/skywings/management");
+        response.sendRedirect("/Skywings/management");
 		response.setContentType("text/html");
     }
 
@@ -25,9 +25,14 @@ public class FlugEintragenServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	HttpSession session = request.getSession(true);
 
-    	String dataName = "../webapps/skywings/WEB-INF/save/saveflug";
-		String baseFlughafenPath = "../webapps/skywings/WEB-INF/save/flughafen/";
+    	String baseSavePath = System.getenv("SAVEPATH");
+    	//C:\Users\samet\Desktop\Uni\5.Semester\SWE\git\Skywings\WebContent\WEB-INF\save\flughafen
+    	String dataName = baseSavePath + "saveflug";
+    	//String dataName = "C:\\Users\\samet\\Desktop\\Uni\\5.Semester\\SWE\\git\\Skywings\\WebContent\\WEB-INF\\save\\saveflug";
+		String baseFlughafenPath = baseSavePath + "flughafen/";
+    	//String baseFlughafenPath = "..\\Skywings\\WebContent\\WEB-INF\\save\\flughafen\\";
         FlugDAO flugDAO = new SerializedFlugDAO(dataName);
+        
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
 
         String flugnr = request.getParameter("flugnr");
@@ -52,7 +57,7 @@ public class FlugEintragenServlet extends HttpServlet {
 
         flugDAO.speichereFlug(new Flug(flugnr, preis, ab_flughafen, an_flughafen, abflugsdatum, ankunftsdatum));
 
-		response.sendRedirect("/skywings/management");
+		response.sendRedirect("/Skywings/management");
 		response.setContentType("text/html");
     }
 

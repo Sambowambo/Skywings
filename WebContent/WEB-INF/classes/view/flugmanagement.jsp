@@ -77,7 +77,7 @@
 
 		<%
 			if(request.getRemoteUser() == null) {
-				response.sendRedirect("/skywings/");
+				response.sendRedirect("/Skywings/");
 			}
 		%>
 
@@ -145,7 +145,7 @@
 							<% if(flugnrList.size() > 0) { %>
 							<li style="margin-top:10px;"><button class="btn btn-lg btn-danger btn-block">Löscht ausgewähltes Flug</button></li>
 							<% } else { %>
-							<li style="margin-top:10px;"><button class="btn btn-lg btn-danger btn-block" onlick="handleDelSubmit()" disabled>Löscht ausgewähltes Flug</button></li>
+							<li style="margin-top:10px;"><button class="btn btn-lg btn-danger btn-block" disabled>Löscht ausgewähltes Flug</button></li>
 							<% } %>
 						</ul>
 					</form>
