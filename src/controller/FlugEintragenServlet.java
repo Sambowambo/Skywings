@@ -25,13 +25,9 @@ public class FlugEintragenServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	HttpSession session = request.getSession(true);
 
-    	String baseSavePath = System.getenv("SAVEPATH");
-    	//C:\Users\samet\Desktop\Uni\5.Semester\SWE\git\Skywings\WebContent\WEB-INF\save\flughafen
-    	String dataName = baseSavePath + "saveflug";
-    	//String dataName = "C:\\Users\\samet\\Desktop\\Uni\\5.Semester\\SWE\\git\\Skywings\\WebContent\\WEB-INF\\save\\saveflug";
-		String baseFlughafenPath = baseSavePath + "flughafen/";
-    	//String baseFlughafenPath = "..\\Skywings\\WebContent\\WEB-INF\\save\\flughafen\\";
-        FlugDAO flugDAO = new SerializedFlugDAO(dataName);
+    	String flugDataName = "../webapps/Skywings/WEB-INF/save/saveflug";
+		String baseFlughafenPath = "../webapps/Skywings/WEB-INF/save/flughafen/";
+        FlugDAO flugDAO = new SerializedFlugDAO(flugDataName);
         
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
 

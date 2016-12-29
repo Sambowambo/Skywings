@@ -48,9 +48,9 @@ public class BuchungAnsehenServlet extends HttpServlet {
 		tnr = request.getParameter("tnr");
 		
 		String buchungnr = tnr.substring(0,tnr.length()-3);
-		
+		int indexofticket = Integer.parseInt(tnr.substring(tnr.length()-3,tnr.length()))-1;
 		try {
-			int indexofticket = Integer.parseInt(tnr.substring(tnr.length()-3,tnr.length()));
+			//int indexofticket = Integer.parseInt(tnr.substring(tnr.length()-3,tnr.length()));
 			
 			if(tnr.equals(bdao.getBuchungbyId(buchungnr).getTicket().get(indexofticket).getTicketnummer()))
 			{					

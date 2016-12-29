@@ -22,11 +22,11 @@ public class FlugManagementServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//String dataName = "C:\\Users\\Paul\\Documents\\Vorlesungen\\3. Semester\\SWE\\tomcat\\webapps\\skywings\\WEB-INF\\save\\saveflug.ser";
-		//String flugDataName = "../webapps/Skywings/WEB-INF/save/saveflug";
-		//String buchungDataName = "../webapps/Skywings/WEB-INF/save/savebuchung";
+		String flugDataName = "../webapps/Skywings/WEB-INF/save/saveflug";
+		String buchungDataName = "../webapps/Skywings/WEB-INF/save/savebuchung";
 		//String flugDataName = "C:\\Users\\samet\\Desktop\\Uni\\5.Semester\\SWE\\git\\Skywings\\WebContent\\WEB-INF\\save\\saveflug";
-		String flugDataName = "testfile_012345";
-		String buchungDataName = "C:\\Users\\samet\\Desktop\\Uni\\5.Semester\\SWE\\git\\Skywings\\WebContent\\WEB-INF\\save\\savebuchung";
+		//String flugDataName = "testfile_012345";
+		//String buchungDataName = "C:\\Users\\samet\\Desktop\\Uni\\5.Semester\\SWE\\git\\Skywings\\WebContent\\WEB-INF\\save\\savebuchung";
 		FlugDAO flugDAO = new SerializedFlugDAO(flugDataName);
 		BuchungDAO buchungDAO = new SerializedBuchungDAO(buchungDataName);
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
