@@ -44,21 +44,27 @@ public class BuchungAnsehenServlet extends HttpServlet {
 		BuchungDAO bdao = new SerializedBuchungDAO(buchungDataName);
 		
 		
-		String tnr = "";
-		tnr = request.getParameter("tnr");
+		String bnr = "";
+		bnr = request.getParameter("bnr");
 		
-		String buchungnr = tnr.substring(0,tnr.length()-3);
-		int indexofticket = Integer.parseInt(tnr.substring(tnr.length()-3,tnr.length()))-1;
+		
+		//int indexofticket = Integer.parseInt(bnr.substring(bnr.length(),bnr.length()));
 		try {
 			//int indexofticket = Integer.parseInt(tnr.substring(tnr.length()-3,tnr.length()));
 			
-			if(tnr.equals(bdao.getBuchungbyId(buchungnr).getTicket().get(indexofticket).getTicketnummer()))
+			if(bnr.equals(bdao.getBuchungbyId(bnr).getBuchungid()))
 			{					
-				request.setAttribute("tnr", tnr);
+				request.setAttribute("buchung", bdao.getBuchungbyId(bnr));
 			}
+			
+			//String a = ""+bdao.getBuchungbyMail("fldsjfklfdjaa").getBuchungid();
+			//request.setAttribute("tnr", a);
+			
 		}
 		catch (NumberFormatException|NullPointerException e) {
-			request.setAttribute("tnr", "Ticket nicht gefunden bitte kontrollieren Sie ihre Eingabe!"+System.getProperty("user.dir"));
+			
+			String a = ""+bdao.getBuchungbyMail("fldsjfklfdjaa").getBuchungid();
+			request.setAttribute("bnr",a);
 		}
 		
 		request.getRequestDispatcher("/WEB-INF/classes/view/buchungansehen.jsp").include(request, response);

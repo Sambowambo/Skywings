@@ -62,13 +62,29 @@ public class SerializedBuchungDAO implements BuchungDAO, Serializable{
 	public Buchung getBuchungbyId(String buchingid) {
 		ArrayList<Buchung> suchlist = this.getBuchungList();
 		for(int i=0; i<suchlist.size(); i++) {
-			if (suchlist.get(i).getBuchungid()==buchingid) {
+			if (suchlist.get(i).getBuchungid().equals(buchingid)) {
 				return suchlist.get(i); 
 			}
 		}
 	//System.out.println("Buchung mit dieser Id konnte nicht gefunden werden!");
 		return null;
 	}
+	
+	//testFUNKTION getBuchungbyCode
+	
+	public Buchung getBuchungbyMail(String mail){
+		ArrayList<Buchung> suchlist = this.getBuchungList();
+		
+		for(int i=0; i<suchlist.size();i++){
+			if(suchlist.get(i).getEmail().equals(mail)){
+				return suchlist.get(i);
+			}
+		}
+		return null;
+	}
+	
+	
+	//testFUNKTIOn getBuchungbyCode
 
 	@Override
 	public boolean speichereBuchung(Buchung buchung) {

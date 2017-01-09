@@ -9,4 +9,6 @@ public interface BuchungDAO {
 	 public Buchung getBuchungbyId(String buchingid);
 	 public boolean speichereBuchung(Buchung buchung);
 	 public boolean loescheBuchung(Buchung buchung);
+	 //test getBuchungbyMail
+	 public Buchung getBuchungbyMail(String mail);
 }

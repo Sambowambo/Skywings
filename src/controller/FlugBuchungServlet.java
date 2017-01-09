@@ -103,7 +103,8 @@ public class FlugBuchungServlet extends HttpServlet {
 
 			passagier.add(new Passagier(vorname, nachname, strasse, ort, plz, g_datum, passnr, passAbDat, nation));
 			tickets.add(new Ticket(ticketnr, passnr, selFlug, flug.nextFreiplatz().getSpalte(), flug.nextFreiplatz().getZeile()));
-			flugDAO.reserveFlug(flugnr, abflugsdatum, flug.getSitzplatzIndex(flug.nextFreiplatz()), true);
+			flugDAO.reserveFlug(flugnr, abflugsdatum, flug.getSitzplatzIndex (flug.nextFreiplatz()), true);
+			flug.getSitzplatz().get(flug.getSitzplatzIndex(flug.nextFreiplatz())).setReserviert(true);
 		}
 
 		request.setAttribute("buchungid", buchungid);

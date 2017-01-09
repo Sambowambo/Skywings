@@ -30,7 +30,7 @@
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
 						Menu <i class="fa fa-bars"></i>
 					</button>
-					<a class="navbar-brand page-scroll" href="/skywings">
+					<a class="navbar-brand page-scroll" href="/Skywings">
 						<i class="fa fa-plane"></i> <span style="font-weight:bold">SKYWINGS</span> Prototyp I
 					</a>
 				</div>
@@ -54,7 +54,7 @@
 			<br>
 			<p class="lead">Ihre Buchungcode ist <%= buchungid %>.</p>
 			<br/><br/>
-			<p><a href="/skywings">Zur ersten Seite zurück</a></p>
+			<p><a href="/Skywings">Zur ersten Seite zurück</a></p>
 		</div>
 	</body>
 </html>

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.buchung.Buchung"%>
+<%@page import="model.Ticket"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,20 +27,36 @@
 					</a>
 				</div>
 		</nav>
-		<% String tnr = (String)request.getAttribute("tnr"); %>
+		<% Buchung buchung = (Buchung)request.getAttribute("buchung"); %>
 		<div class="container">
-		<% if (tnr == null) { %>
+		<% if (buchung == null) { %>
 			<form class="search-booking" method="POST" >
-				<h2 class="booking-heading">Please enter your Ticketnumber</h2><br>
-				<label for="inputTicketnr" class="sr-only">Ticketnumber</label>
-				<input type="text" name ="tnr" id="inputTicketnr" class="form-control" placeholder="z.B. AB123#2016-12-12@12:35_001002" name="j_tnumber" required >
+				<h2 class="booking-heading">Please enter your Bookingnumber</h2><br>
+				<label for="inputBookingbnr" class="sr-only">Bookingnumber</label>
+				<input type="text" name ="bnr" id="inputBookingbnr" class="form-control" placeholder="z.B. AB123#2016-12-12@12:35_001" name="j_bnumber" required >
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Ansehen</button>
 			</form>
 			
 			<!-- this is just a test -->
 		<% } else { %> 
 			<div id="info-output">
-				Ticketnummer: <%= tnr %>
+				Buchungsnummer: <%= buchung.getBuchungid() %><br>
+				E-mail:         <%= buchung.getEmail() %><br>
+				Telefonnummer:  <%= buchung.getTelefonnummer() %><br>
+				
+				<% for(int i =0;i<buchung.getPassagier().size();i++){
+					String name = buchung.getPassagier().get(i).getVorname()+" "+buchung.getPassagier().get(i).getNachname();  
+					String gebdat = ""+buchung.getPassagier().get(i).getGeburtsdatum(); 
+					String passnr = buchung.getPassagier().get(i).getPassnummer();
+					String nation = buchung.getPassagier().get(i).getNationalitaet();
+					String adresse = buchung.getPassagier().get(i).getStrasse()+" "+buchung.getPassagier().get(i).getPostleitzahl(); %>
+				Name: <%= name %><br>
+				Geburtsdatum: <%= gebdat %><br>
+				Passnummer: <%= passnr %><br>
+				Nation: <%= nation %><br>
+				Adresse: <%= adresse %><br>
+				<% } %>
+							
 			</div>
 		<% } %>
 			
