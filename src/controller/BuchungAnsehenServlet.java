@@ -63,9 +63,10 @@ public class BuchungAnsehenServlet extends HttpServlet {
 		}
 		catch (NumberFormatException|NullPointerException e) {
 			
-			String a = ""+bdao.getBuchungbyMail("fldsjfklfdjaa").getBuchungid();
-			request.setAttribute("bnr",a);
+			//String a = ""+bdao.getBuchungbyMail("fldsjfklfdjaa").getBuchungid();
+			request.setAttribute("bnr","Buchungsnummer existiert nicht bitte erneut eingeben!");
 		}
+		
 		
 		request.getRequestDispatcher("/WEB-INF/classes/view/buchungansehen.jsp").include(request, response);
 		response.setContentType("text/html");

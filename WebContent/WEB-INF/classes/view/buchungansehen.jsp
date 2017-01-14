@@ -10,6 +10,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/bansehen.css">
 		<script src="vendor/jquery/jquery.js"></script>
 		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -40,26 +41,71 @@
 			<!-- this is just a test -->
 		<% } else { %> 
 			<div id="info-output">
-				Buchungsnummer: <%= buchung.getBuchungid() %><br>
-				E-mail:         <%= buchung.getEmail() %><br>
-				Telefonnummer:  <%= buchung.getTelefonnummer() %><br>
+			
+			<table class="table">
+			<thead>
+				<tr>
+				<th>Buchungsnummer </th>
+				<th>E-mail </th>
+				<th>Telefonnummer </th>
+				<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				<td><%= buchung.getBuchungid() %> </td>
+				<td><div id="writemail"><%= buchung.getEmail() %></div></td>
+				<td id="writetel"><%= buchung.getTelefonnummer() %> </td>
+				<td><button class="btn btn-default" onClick="buchung_bearbeiten()"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+				</tr>
+			</tbody>
+			
+			
+			<script>
+				function buchung_bearbeiten() 
+				{
+					document.getElementById("writemail").innerHTML = "blahblah";
+					document.getElementById("writetel").innerHTML = "meh";
+				}
+			</script>
+			
+			
+			
 				
+				<table class="table">
+			<thead>
+				<tr>
+				<th>Name </th>
+				<th>Geburtsdatum </th>
+				<th>Passnummer </th>
+				<th>Nation</th>
+				<th>Adresse</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			
+			
 				<% for(int i =0;i<buchung.getPassagier().size();i++){
 					String name = buchung.getPassagier().get(i).getVorname()+" "+buchung.getPassagier().get(i).getNachname();  
 					String gebdat = ""+buchung.getPassagier().get(i).getGeburtsdatum(); 
 					String passnr = buchung.getPassagier().get(i).getPassnummer();
 					String nation = buchung.getPassagier().get(i).getNationalitaet();
 					String adresse = buchung.getPassagier().get(i).getStrasse()+" "+buchung.getPassagier().get(i).getPostleitzahl(); %>
-				Name: <%= name %><br>
-				Geburtsdatum: <%= gebdat %><br>
-				Passnummer: <%= passnr %><br>
-				Nation: <%= nation %><br>
-				Adresse: <%= adresse %><br>
+				<tr>
+				<td><%= name %> </td>
+				<td><%= gebdat %> </td>
+				<td><%= passnr %> </td>
+				<td><%= nation %> </td>
+				<td><%= adresse %> </td>
+				<td><button class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+				</tr>
 				<% } %>
+				</tbody>
 							
 			</div>
 		<% } %>
-			
+		</table>
 		</div>
 	</body>
 </html>
