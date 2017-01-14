@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.buchung.dao.BuchungDAO;
 import model.buchung.dao.SerializedBuchungDAO;
@@ -43,10 +44,8 @@ public class BuchungAnsehenServlet extends HttpServlet {
 		String buchungDataName = "../webapps/skywings/WEB-INF/save/savebuchung";
 		BuchungDAO bdao = new SerializedBuchungDAO(buchungDataName);
 		
-		
 		String bnr = "";
 		bnr = request.getParameter("bnr");
-		
 		
 		//int indexofticket = Integer.parseInt(bnr.substring(bnr.length(),bnr.length()));
 		try {
@@ -67,8 +66,12 @@ public class BuchungAnsehenServlet extends HttpServlet {
 			request.setAttribute("bnr","Buchungsnummer existiert nicht bitte erneut eingeben!");
 		}
 		
+		request.setAttribute("bbr", true);
+		if(request.getParameter("b_bearbeiten") != null) {
+			request.setAttribute("bbr", false);
+		}
 		
-		request.getRequestDispatcher("/WEB-INF/classes/view/buchungansehen.jsp").include(request, response);
+		request.getRequestDispatcher("/WEB-INF/classes/view/buchungansehen.jsp").forward(request, response);
 		response.setContentType("text/html");
 	}
 
