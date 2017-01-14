@@ -98,3 +98,5 @@ local.properties
 build
 
 .idea
+WebContent/WEB-INF/classes/controller/BuchungAnsehenServlet.class
+build/skywings.war
