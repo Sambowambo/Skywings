@@ -133,7 +133,7 @@
 				</tbody>
 				<%for(int j=0;j<buchung.getPassagier().size();j++){ %>
 				<script>
-				$('#Passagier1').click( function(){
+				$('#Passagier<%=j+1%>').click( function(){
 					var $oldmail = $('#writename');
 					var $mailinput = $('<input\>').val($oldmail.text());
 					//$mailinput.attr("name", "mailinput");

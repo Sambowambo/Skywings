@@ -96,7 +96,18 @@
 					} else {
 				%>
 
-				<table class="table table-hover">
+				
+					<a class="btn btn-danger" id="flug_zeigen" onclick="asd()">Alle Fluege anzeigen</a>
+				
+				
+				<script>
+					function asd() {
+						document.getElementById('asd').style.display = 'initial';
+					}
+				
+				
+				</script>
+				<table class="table table-hover" id="asd" style="display:none;">
 					<thead>
 						<tr>
 							<th></th>
@@ -136,7 +147,7 @@
 				</table>
 			</form>
 		</div>
-
+	
 		<footer class="footer">
 			<div class="container">
 				<form name="book-flug" action="buchung" method="GET">

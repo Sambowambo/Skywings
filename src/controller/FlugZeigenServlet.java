@@ -24,6 +24,8 @@ public class FlugZeigenServlet extends HttpServlet {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
 		DecimalFormat decf = new DecimalFormat("0.00");
 
+		
+		
 		ArrayList<String> flugnrList = new ArrayList<>();
 		ArrayList<String> preisList = new ArrayList<>();
 		ArrayList<Integer> freiplatzList = new ArrayList<>();
@@ -57,7 +59,13 @@ public class FlugZeigenServlet extends HttpServlet {
 
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/skywings/flugliste");
+        
+		
+	
+	
+		
+		
+		response.sendRedirect("/skywings/flugliste");
 		response.setContentType("text/html");
     }
 }
