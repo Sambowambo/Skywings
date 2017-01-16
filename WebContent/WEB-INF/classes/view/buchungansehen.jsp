@@ -78,19 +78,16 @@
 				
 
 					$(document).on('click','button#b_bearbeiten', function(){
-						var $oldmail = $('#writemail');
-						var $buffer_mail = $oldmail;
-						var $mailinput = $('<input\>').val($oldmail.text());
+						
+						var $mailinput = $('<input\>').val($('#writemail').text());
 						$mailinput.attr("name", "mailinput");
 						$mailinput.attr("id", "mailinput");
-						$oldmail.replaceWith($mailinput);
 						
-						var $oldtel = $('#writetel');
-						var $buffer_tel = $oldtel;
-						var $telinput = $('<input\>').val($oldtel.text());
+						
+						var $telinput = $('<input\>').val($('#writetel').text());
 						$telinput.attr("name", "telinput");
 						$telinput.attr("id", "telinput");
-						$oldtel.replaceWith($telinput);
+						
 						
 						$('#b_cancel').attr("class", "btn btn-danger");
 						$('#b_cancel').attr("style","");
@@ -105,12 +102,26 @@
 						$('#b_bearbeiten').replaceWith($save_btn);
 						
 						$('#b_cancel').click(function() {
-							$('#mailinput').replaceWith($buffer_mail);
-							$('#telinput').replaceWith($buffer_tel);
+
+							var $mail = "<%=buchung.getEmail()%>";
+							var $tel ="<%=buchung.getTelefonnummer()%>";
+							$('#mailinput').replaceWith($mail);
+							$('#telinput').replaceWith($tel);
 							
 							$('#b_save').replaceWith($edit_btn);
-							//$('#b_save').attr("id", "b_bearbeiten");
-							//$('#b_save').attr("name", "b_bearbeiten")
+							$('#b_cancel').attr("style","display:none;");
+							
+							
+						});
+						
+						$('#b_save').click(function() {
+
+							var $mail = "<%=buchung.getEmail()%>";
+							var $tel ="<%=buchung.getTelefonnummer()%>";
+							$('#mailinput').replaceWith($mail);
+							$('#telinput').replaceWith($tel);
+							
+							$('#b_save').replaceWith($edit_btn);
 							$('#b_cancel').attr("style","display:none;");
 							
 							
