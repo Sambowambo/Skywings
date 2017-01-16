@@ -3,6 +3,7 @@ package controller;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import model.buchung.dao.BuchungDAO;
@@ -217,42 +218,71 @@ public double avgPreis(Date date1, Date date2){
 	
 @SuppressWarnings("deprecation")
 public String Zeitintensitaet(){
-	int morgen=0;
-	int vormittag=0;
-	int mittag=0;
-	int nachmittag=0;
-	int abend=0;
-	int nacht=0;
+		
+	// zeiten[] beinhaltet die einzelnen zeiten in folgender reihenfolge 
+	//zeiten[0]..morgen, zeiten[1]..vormittag,zeiten[2]..mittag,zeiten[3]..nachmittag,zeiten[4]..abend,zeiten[5]..nacht
+	int zeiten [] = new int []{0,0,0,0,0,0};
 	
-	String zeit;
+	int maxintensitaet;
+	String maxzeit="";
 	
 	for (int i=0; i<gesamtzahlFluegen(); i++){
    
 		switch(flugdao.getFlugbyNummer(buchungdao.getBuchungList().get(i).getFlugcode()).getAbflugsdatum().getHours()){
 		case 6: case 7: case 8: case 9: case 10: 
-			morgen++;
+			zeiten[0]++;
 			break;
 		case 11: case 12: 
-			vormittag++;
+			zeiten[1]++;
 			break;
 		case 13:
-			mittag++;
+			zeiten[2]++;
 			break;
 		case 14: case 15: case 16: case 17:
-			nachmittag++;
+			zeiten[3]++;
 			break;
 		case 18: case 19: case 20: case 21: case 22: case 23: case 0:
-			abend++;
+			zeiten[4]++;
 			break;
 		case 1: case 2: case 3: case 4: case 5:
-			nacht++;
+			zeiten[5]++;
 			break;
 			//default:; 
 			}
 	}
 	
+	maxintensitaet=SortZeit(zeiten);
 	
-	return zeit;
+	for(int i =0;i<zeiten.length;i++)
+	{
+		if(zeiten[0]==maxintensitaet)
+		{
+			maxzeit=maxzeit+" morgen: "+maxintensitaet;
+		}
+		else if(zeiten[1]==maxintensitaet)
+		{
+			maxzeit=maxzeit+" vormittag: "+maxintensitaet;			
+		}
+		else if(zeiten[2]==maxintensitaet)
+		{
+			maxzeit=maxzeit+" mittag: "+maxintensitaet;
+		}
+		else if(zeiten[3]==maxintensitaet)
+		{
+			maxzeit=maxzeit+" nachmittag: "+maxintensitaet;
+		}
+		else if(zeiten[4]==maxintensitaet)
+		{
+			maxzeit=maxzeit+" abend: "+maxintensitaet;
+		}
+		else if(zeiten[5]==maxintensitaet)
+		{
+			maxzeit=maxzeit+" nacht: "+maxintensitaet;
+		}
+	}
+	
+	
+	return maxzeit;
 	
 	
 	
@@ -260,15 +290,12 @@ public String Zeitintensitaet(){
 	
 }
 
-public SortZeit(int a, int b, int c, int d, int e,int f)
+public int SortZeit(int zeiten[])
 {
 	
-	int []max = new int [6]; 
-	for(int i =0;i<6;i++)
-	{
-		max[i]=
-	}
+	Arrays.sort(zeiten); 
 	
+	return zeiten[0];
 }
 
 	
