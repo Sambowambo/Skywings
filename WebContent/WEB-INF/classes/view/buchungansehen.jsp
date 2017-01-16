@@ -28,7 +28,7 @@
 					</a>
 				</div>
 		</nav>
-		<% Buchung buchung = (Buchung)request.getAttribute("buchung"); %>
+		<% Buchung buchung = (Buchung)request.getAttribute("buchung");%>
 		<div class="container">
 		<% if (buchung == null) { %>
 			<form class="search-booking" method="POST" >
@@ -51,24 +51,51 @@
 				<th></th>
 				</tr>
 			</thead>
+			
+			<%
+			boolean bbr = (boolean)request.getAttribute("bbr");
+			if(bbr==false)
+			{%>
+			this is something
+			<% } else {%>
 			<tbody>
 				<tr>
 				<td><%= buchung.getBuchungid() %> </td>
 				<td><div id="writemail"><%= buchung.getEmail() %></div></td>
-				<td id="writetel"><%= buchung.getTelefonnummer() %> </td>
-				<td><button class="btn btn-default" onClick="buchung_bearbeiten()"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+				<td><div id="writetel"><%= buchung.getTelefonnummer() %></div></td>
+				<td>
+					<button class="btn btn-default" id="b_bearbeiten" name="b_bearbeiten"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+				</td>
+				<td>
+					<button class="btn btn-default" style="display:none" id="b_bearbeiten_2" name="b_bearbeiten_2"><i class="fa fa-times" aria-hidden="true"></i></button>
+				</td>
 				</tr>
 			</tbody>
-			
-			
+			<% } %>
+			 
 			<script>
-				function buchung_bearbeiten() 
-				{
-					document.getElementById("writemail").innerHTML = "blahblah";
-					document.getElementById("writetel").innerHTML = "meh";
-				}
+				$('#b_bearbeiten').click( function(){
+					var $oldmail = $('#writemail');
+					var $mailinput = $('<input\>').val($oldmail.text());
+					$mailinput.attr("name", "mailinput");
+					$oldmail.replaceWith($mailinput);
+					
+					var $oldmail = $('#writetel');
+					var $mailinput = $('<input\>').val($oldmail.text());
+					$oldmail.replaceWith($mailinput);
+					
+					$('#b_bearbeiten').attr("class", "btn btn-success");
+					$('#b_bearbeiten_2').attr("class", "btn btn-danger");
+					
+					$('#b_bearbeiten').html("<i class=\"fa fa-check\" aria-hidden=\"true\"></i>");
+					$('#b_bearbeiten_2').attr("style","");					
+				});
+				
+				$('#b_bearbeiten_2').click(function(){
+					var $mail = $('#writemail').val();
+					$('#writemail').replaceWith($('<div />').text($mail));
+				});
 			</script>
-			
 			
 			
 				
@@ -91,17 +118,51 @@
 					String gebdat = ""+buchung.getPassagier().get(i).getGeburtsdatum(); 
 					String passnr = buchung.getPassagier().get(i).getPassnummer();
 					String nation = buchung.getPassagier().get(i).getNationalitaet();
-					String adresse = buchung.getPassagier().get(i).getStrasse()+" "+buchung.getPassagier().get(i).getPostleitzahl(); %>
+					String adresse = buchung.getPassagier().get(i).getStrasse()+" "+buchung.getPassagier().get(i).getPostleitzahl(); 
+					String passagier_btn = "";
+					passagier_btn = "Passagier" + (i+1);%>
 				<tr>
-				<td><%= name %> </td>
-				<td><%= gebdat %> </td>
-				<td><%= passnr %> </td>
-				<td><%= nation %> </td>
-				<td><%= adresse %> </td>
-				<td><button class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+				<td><div id="writename"><%= name %></div> </td>
+				<td><div id="writegebdat"><%= gebdat %></div> </td>
+				<td><div id="writepassnr"> <%= passnr %></div> </td>
+				<td><div id="writenation"><%= nation %></div> </td>
+				<td><div id="writeadresse"><%= adresse %></div> </td>
+				<td><button id=<%= passagier_btn %> class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
 				</tr>
 				<% } %>
 				</tbody>
+				<%for(int j=0;j<buchung.getPassagier().size();j++){ %>
+				<script>
+				$('#Passagier1').click( function(){
+					var $oldmail = $('#writename');
+					var $mailinput = $('<input\>').val($oldmail.text());
+					//$mailinput.attr("name", "mailinput");
+					$oldmail.replaceWith($mailinput);
+					
+					var $oldmail = $('#writegebdat');
+					var $mailinput = $('<input\>').val($oldmail.text());
+					//$mailinput.attr("name", "mailinput");
+					$oldmail.replaceWith($mailinput);
+					
+					var $oldmail = $('#writepassnr');
+					var $mailinput = $('<input\>').val($oldmail.text());
+					//$mailinput.attr("name", "mailinput");
+					$oldmail.replaceWith($mailinput);
+					
+					var $oldmail = $('#writenation');
+					var $mailinput = $('<input\>').val($oldmail.text());
+					//$mailinput.attr("name", "mailinput");
+					$oldmail.replaceWith($mailinput);
+					
+					var $oldmail = $('#writeadresse');
+					var $mailinput = $('<input\>').val($oldmail.text());
+					//$mailinput.attr("name", "mailinput");
+					$oldmail.replaceWith($mailinput);
+					
+					
+				});
+			</script>
+			<%} %>
 							
 			</div>
 		<% } %>
