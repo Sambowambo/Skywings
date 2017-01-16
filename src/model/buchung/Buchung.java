@@ -1,13 +1,17 @@
 package model.buchung;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 import model.*;
 
 public class Buchung implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String buchungid;
 	private Date buchungsdatum;
 	private String email;

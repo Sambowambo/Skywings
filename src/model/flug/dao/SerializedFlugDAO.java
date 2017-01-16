@@ -58,7 +58,19 @@ public class SerializedFlugDAO implements FlugDAO {
         return flugList;
     }
 
-    //public List<Flug> getFlugbyNummer(String nummer);
+    public Flug getFlugbyNummer(String nr) {
+    	ArrayList<Flug> flugList = this.getFlugList();
+        int pos = -1;
+
+        for(int i=0; i < flugList.size(); i++)
+            if(flugList.get(i).getFlugnr().equals(nr))
+                pos = i;
+
+        if(pos >= 0)
+            return flugList.get(pos);
+        else
+		  return null;
+    };
     //public List<Flug> getFlugbyDatum(Calendar abflugsdatum);
     public Flug getFlugbyNrandDatum(String nr, Date abflugsdatum){
 		ArrayList<Flug> flugList = this.getFlugList();
