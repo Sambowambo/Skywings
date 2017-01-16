@@ -64,37 +64,61 @@
 				<td><div id="writemail"><%= buchung.getEmail() %></div></td>
 				<td><div id="writetel"><%= buchung.getTelefonnummer() %></div></td>
 				<td>
-					<button class="btn btn-default" id="b_bearbeiten" name="b_bearbeiten"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+					<button class="btn btn-default" id="b_bearbeiten" name="b_bearbeiten" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
 				</td>
 				<td>
-					<button class="btn btn-default" style="display:none" id="b_bearbeiten_2" name="b_bearbeiten_2"><i class="fa fa-times" aria-hidden="true"></i></button>
+					<button class="btn btn-default" style="display:none" id="b_cancel" name="b_bearbeiten_2"><i class="fa fa-times" aria-hidden="true"></i></button>
 				</td>
 				</tr>
 			</tbody>
 			<% } %>
-			 
+			
 			<script>
-				$('#b_bearbeiten').click( function(){
-					var $oldmail = $('#writemail');
-					var $mailinput = $('<input\>').val($oldmail.text());
-					$mailinput.attr("name", "mailinput");
-					$oldmail.replaceWith($mailinput);
-					
-					var $oldmail = $('#writetel');
-					var $mailinput = $('<input\>').val($oldmail.text());
-					$oldmail.replaceWith($mailinput);
-					
-					$('#b_bearbeiten').attr("class", "btn btn-success");
-					$('#b_bearbeiten_2').attr("class", "btn btn-danger");
-					
-					$('#b_bearbeiten').html("<i class=\"fa fa-check\" aria-hidden=\"true\"></i>");
-					$('#b_bearbeiten_2').attr("style","");					
-				});
+			
 				
-				$('#b_bearbeiten_2').click(function(){
-					var $mail = $('#writemail').val();
-					$('#writemail').replaceWith($('<div />').text($mail));
-				});
+
+					$(document).on('click','button#b_bearbeiten', function(){
+						var $oldmail = $('#writemail');
+						var $buffer_mail = $oldmail;
+						var $mailinput = $('<input\>').val($oldmail.text());
+						$mailinput.attr("name", "mailinput");
+						$mailinput.attr("id", "mailinput");
+						$oldmail.replaceWith($mailinput);
+						
+						var $oldtel = $('#writetel');
+						var $buffer_tel = $oldtel;
+						var $telinput = $('<input\>').val($oldtel.text());
+						$telinput.attr("name", "telinput");
+						$telinput.attr("id", "telinput");
+						$oldtel.replaceWith($telinput);
+						
+						$('#b_cancel').attr("class", "btn btn-danger");
+						$('#b_cancel').attr("style","");
+						
+						var $edit_btn = $('#b_bearbeiten');
+						
+						$save_btn = $('<button\>').html("<i class=\"fa fa-check\" aria-hidden=\"true\"></i>");
+						$save_btn.attr("id", "b_save");
+						$save_btn.attr("name", "b_save");
+						$save_btn.attr("class", "btn btn-success");
+						
+						$('#b_bearbeiten').replaceWith($save_btn);
+						
+						$('#b_cancel').click(function() {
+							$('#mailinput').replaceWith($buffer_mail);
+							$('#telinput').replaceWith($buffer_tel);
+							
+							$('#b_save').replaceWith($edit_btn);
+							//$('#b_save').attr("id", "b_bearbeiten");
+							//$('#b_save').attr("name", "b_bearbeiten")
+							$('#b_cancel').attr("style","display:none;");
+							
+							
+						});
+						
+					});
+					
+				
 			</script>
 			
 			
@@ -129,6 +153,9 @@
 				<td><div id="writeadresse"><%= adresse %></div> </td>
 				<td><button id=<%= passagier_btn %> class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
 				</tr>
+				<td>
+					<button class="btn btn-default" style="display:none" id="P<%=i %>" name="b_bearbeiten_2"><i class="fa fa-times" aria-hidden="true"></i></button>
+				</td>
 				<% } %>
 				</tbody>
 				<%for(int j=0;j<buchung.getPassagier().size();j++){ %>
@@ -159,6 +186,11 @@
 					//$mailinput.attr("name", "mailinput");
 					$oldmail.replaceWith($mailinput);
 					
+					$('#Passagier<%=j+1%>').attr("class", "btn btn-success");
+					$('#P<%=j+1%>').attr("class", "btn btn-danger");
+					
+					$('#Passagier<%=j+1%>').html("<i class=\"fa fa-check\" aria-hidden=\"true\"></i>");
+					$('#P<%=j+1%>').attr("style","");	
 					
 				});
 			</script>
