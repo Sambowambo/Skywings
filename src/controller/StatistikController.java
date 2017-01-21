@@ -1,7 +1,6 @@
 package controller;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -16,15 +15,15 @@ public class StatistikController {
 
 	private String buchungDataName = "../webapps/skywings/WEB-INF/save/savebuchung";
 	private String flugDataName = "../webapps/skywings/WEB-INF/save/saveflug";
-	private BuchungDAO buchungdao = new SerializedBuchungDAO(buchungDataName); 
-	private FlugDAO flugdao = new SerializedFlugDAO(flugDataName);
+	private BuchungDAO buchungdao; 
+	private FlugDAO flugdao;
 	private int sitzplatz=200;
 	
 	
-	public StatistikController(BuchungDAO buchungdao, FlugDAO flugdao) {
+	public StatistikController() {
 		
-		this.buchungdao = buchungdao;
-		this.flugdao = flugdao;
+		this.buchungdao = new SerializedBuchungDAO(buchungDataName);
+		this.flugdao = new SerializedFlugDAO(flugDataName);
 	}
 	
 	public int gesamtzahlFluegen(){

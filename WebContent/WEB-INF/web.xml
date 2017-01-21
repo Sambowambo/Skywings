@@ -37,6 +37,10 @@
     <servlet-name>BuchungAnsehenServlet</servlet-name>
     <servlet-class>controller.BuchungAnsehenServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>StatistikServlet</servlet-name>
+    <servlet-class>controller.StatistikServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>FlugManagementServlet</servlet-name>
     <url-pattern>/management</url-pattern>
@@ -60,6 +64,10 @@
   <servlet-mapping>
     <servlet-name>BuchungAnsehenServlet</servlet-name>
     <url-pattern>/buchungansehen</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StatistikServlet</servlet-name>
+    <url-pattern>/statistik</url-pattern>
   </servlet-mapping>
   <security-role>
     <role-name>fluggesellschaft</role-name>
