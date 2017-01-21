@@ -35,6 +35,7 @@
 	</head>
 
 	<body>
+		
 		<%
 		ArrayList<String> flugnrList = (ArrayList<String>)request.getAttribute("flugnrList");
 		ArrayList<Double> preisList = (ArrayList<Double>)request.getAttribute("preisList");
@@ -74,6 +75,34 @@
 			<h1>Skywings Prototyp I</h1>
 			<p class="lead" style="margin-top:15px;">Alle Fluege sind hier zu buchen</p>
 		</div>
+		
+		<div class="container">
+			
+			<form method="POST" action="suchen">
+			<div class="row">
+				<div class="col-md-3">
+					<label for="Abflugort">Abflugort:</label><br>
+					<input type="text" id="Abflugort" name="Abflugort" class="form-control" placeholder="Abflugort zB Wien">
+				</div>
+				
+				<div class="col-md-3">
+					<label for="Ankunftsort">Ankunftsort:</label><br>
+					<input type="text" id="Ankunftsort" name="Ankunftsort" class="form-control" placeholder="Ankunftsort zB London">
+				</div>
+				
+				<div class="col-md-3">
+				<label for="Datum">Datum:</label><br>
+					<input type="text" id="Abflugdatum" name="Abflugdatum" class="form-control" placeholder="Abflugdatum zB 2017-02-24">
+				</div>
+				<div class="col-md-3">
+					<br>
+					<button type="submit" class="btn btn-default">Suchen</button>
+				</div>
+			</div>
+			</form>
+			<% String test = (String)request.getAttribute("test"); %>
+			<%= test %>
+		</div>
 
 		<div class="container">
 			<form name="flugList-form">
@@ -96,7 +125,7 @@
 					} else {
 				%>
 
-				
+				<!--
 					<a class="btn btn-danger" id="flug_zeigen" onclick="asd()">Alle Fluege anzeigen</a>
 				
 				
@@ -107,7 +136,8 @@
 				
 				
 				</script>
-				<table class="table table-hover" id="asd" style="display:none;">
+				-->
+				<table class="table table-hover" id="asd" style="display:initial;">
 					<thead>
 						<tr>
 							<th></th>

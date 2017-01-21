@@ -41,6 +41,11 @@
     <servlet-name>StatistikServlet</servlet-name>
     <servlet-class>controller.StatistikServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>FlugSucheServlet</servlet-name>
+    <servlet-class>controller.FlugSucheServlet</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
     <servlet-name>FlugManagementServlet</servlet-name>
     <url-pattern>/management</url-pattern>
@@ -68,6 +73,10 @@
   <servlet-mapping>
     <servlet-name>StatistikServlet</servlet-name>
     <url-pattern>/statistik</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FlugSucheServlet</servlet-name>
+    <url-pattern>/suchen</url-pattern>
   </servlet-mapping>
   <security-role>
     <role-name>fluggesellschaft</role-name>
