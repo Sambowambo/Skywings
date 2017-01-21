@@ -42,7 +42,7 @@
 		<% } else { %> 
 			<div id="info-output">
 			
-			<table class="table">
+			<table class="table" >
 			<thead>
 				<tr>
 				<th>Buchungsnummer </th>
@@ -68,7 +68,7 @@
 				</td>
 				<td>
 					<button class="btn btn-default" style="display:none" id="b_cancel" name="b_bearbeiten_2"><i class="fa fa-times" aria-hidden="true"></i></button>
-				</td>
+				</td> 
 				</tr>
 			</tbody>
 			<% } %>
@@ -92,8 +92,6 @@
 						$telinput.attr("id", "telinput");
 						$oldtel.replaceWith($telinput);
 						
-						$('#b_cancel').attr("class", "btn btn-danger");
-						$('#b_cancel').attr("style","");
 						
 						var $edit_btn = $('#b_bearbeiten');
 						
@@ -103,6 +101,9 @@
 						$save_btn.attr("class", "btn btn-success");
 						
 						$('#b_bearbeiten').replaceWith($save_btn);
+						
+						$('#b_cancel').attr("class", "btn btn-danger");
+						$('#b_cancel').attr("style","");
 						
 						$('#b_cancel').click(function() {
 
@@ -123,7 +124,7 @@
 			
 			
 				
-				<table class="table">
+				<table class="table" id="tablelist" >
 			<thead>
 				<tr>
 				<th>Name </th>
@@ -144,60 +145,93 @@
 					String nation = buchung.getPassagier().get(i).getNationalitaet();
 					String adresse = buchung.getPassagier().get(i).getStrasse()+" "+buchung.getPassagier().get(i).getPostleitzahl(); 
 					String passagier_btn = "";
-					passagier_btn = "Passagier" + (i+1);%>
+					passagier_btn = ""+(i+1);
+					String passagier_cncl ="";
+					passagier_cncl="c"+(i+1);
+							
+					%>
 				<tr>
-				<td><div id="writename"><%= name %></div> </td>
-				<td><div id="writegebdat"><%= gebdat %></div> </td>
-				<td><div id="writepassnr"> <%= passnr %></div> </td>
-				<td><div id="writenation"><%= nation %></div> </td>
-				<td><div id="writeadresse"><%= adresse %></div> </td>
-				<td><button id=<%= passagier_btn %> class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
-				</tr>
+				<td><div id="writename<%=i+1%>"><%= name %></div> </td>
+				<td><div id="writegebdat<%=i+1%>"><%= gebdat %></div> </td>
+				<td><div id="writepassnr<%=i+1%>"> <%= passnr %></div> </td>
+				<td><div id="writenation<%=i+1%>"><%= nation %></div> </td>
+				<td><div id="writeadresse<%=i+1%>"><%= adresse %></div> </td>
 				<td>
-					<button class="btn btn-default" style="display:none" id="P<%=i %>" name="b_bearbeiten_2"><i class="fa fa-times" aria-hidden="true"></i></button>
+					<button id=<%= passagier_btn %> class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i></button>
 				</td>
+				</tr>
+				 <td>
+					<button class="btn btn-default" style="display:none" id=<%=passagier_cncl %> name="b_bearbeiten_2"><i class="fa fa-times" aria-hidden="true"></i></button>
+				</td> 
 				<% } %>
 				</tbody>
-				<%for(int j=0;j<buchung.getPassagier().size();j++){ %>
+				
+				<script type="text/javascript" src="js/bansehen_id_2.js"></script>
 				<script>
-				$('#Passagier<%=j+1%>').click( function(){
-					var $oldmail = $('#writename');
-					var $mailinput = $('<input\>').val($oldmail.text());
+				$(document).on('click','#1', function(){
+					
+					var $idedit = 1;
+					
+					var $oldname = $('#writename'+$idedit);
+					var $nameinput = $('<input\>').val($oldname.text());
 					//$mailinput.attr("name", "mailinput");
-					$oldmail.replaceWith($mailinput);
+					$oldname.replaceWith($nameinput);
 					
-					var $oldmail = $('#writegebdat');
-					var $mailinput = $('<input\>').val($oldmail.text());
+					var $olddat = $('#writegebdat'+$idedit);
+					var $datinput = $('<input\>').val($olddat.text());
 					//$mailinput.attr("name", "mailinput");
-					$oldmail.replaceWith($mailinput);
+					$olddat.replaceWith($datinput);
 					
-					var $oldmail = $('#writepassnr');
-					var $mailinput = $('<input\>').val($oldmail.text());
+					var $oldpass = $('#writepassnr'+$idedit);
+					var $passinput = $('<input\>').val($oldpass.text());
 					//$mailinput.attr("name", "mailinput");
-					$oldmail.replaceWith($mailinput);
+					$oldpass.replaceWith($passinput);
 					
-					var $oldmail = $('#writenation');
-					var $mailinput = $('<input\>').val($oldmail.text());
+					var $oldnation = $('#writenation'+$idedit);
+					var $nationinput = $('<input\>').val($oldnation.text());
 					//$mailinput.attr("name", "mailinput");
-					$oldmail.replaceWith($mailinput);
+					$oldnation.replaceWith($nationinput);
 					
-					var $oldmail = $('#writeadresse');
-					var $mailinput = $('<input\>').val($oldmail.text());
+					var $oldadress = $('#writeadresse'+$idedit);
+					var $adressinput = $('<input\>').val($oldadress.text());
 					//$mailinput.attr("name", "mailinput");
-					$oldmail.replaceWith($mailinput);
+					$oldadress.replaceWith($adressinput);
 					
-					$('#Passagier<%=j+1%>').attr("class", "btn btn-success");
-					$('#P<%=j+1%>').attr("class", "btn btn-danger");
+					var $edit_btn = $('#'+$idedit);
 					
-					$('#Passagier<%=j+1%>').html("<i class=\"fa fa-check\" aria-hidden=\"true\"></i>");
-					$('#P<%=j+1%>').attr("style","");	
+					$save_btn = $('<button\>').html("<i class=\"fa fa-check\" aria-hidden=\"true\"></i>");
+					$save_btn.attr("id", "b_save"+$idedit);
+					$save_btn.attr("name", "b_save"+$idedit);
+					$save_btn.attr("class", "btn btn-success");
+					
+					$('#'+$idedit).replaceWith($save_btn);
+					
+					$('#c'+$idedit).attr("class", "btn btn-danger");
+					$('#c'+$idedit).attr("style","");
+					
+					$('#c'+$idedit).click(function() {
+
+						
+						$('#nameinput').replaceWith($oldname);
+						$('#datinput').replaceWith($olddat);
+						$('#passinput').replaceWith($oldpass);
+						$('#nationinput').replaceWith($oldnation);
+						$('#adressinput').replaceWith($oldadress);
+						
+						
+						$('#b_save'+$idedit).replaceWith($edit_btn);
+						$('#c'+$idedit).attr("style","display:none;");
+						
+						
+					});
+						
 					
 				});
 			</script>
 			<%} %>
 							
 			</div>
-		<% } %>
+		
 		</table>
 		</div>
 	</body>
