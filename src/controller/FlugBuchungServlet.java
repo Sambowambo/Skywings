@@ -34,8 +34,11 @@ public class FlugBuchungServlet extends HttpServlet {
 
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String buchungDataName = "../webapps/skywings/WEB-INF/save/savebuchung";
-    	String flugDataName = "../webapps/skywings/WEB-INF/save/saveflug";
+		ServletContext context = getServletContext();
+
+		String flugDataName = context.getInitParameter("flugpath");
+		String buchungDataName = context.getInitParameter("buchungpath");
+
     	BuchungDAO buchungDAO = new SerializedBuchungDAO(buchungDataName);
     	FlugDAO flugDAO = new SerializedFlugDAO(flugDataName);
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

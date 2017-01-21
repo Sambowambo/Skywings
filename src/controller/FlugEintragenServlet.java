@@ -23,10 +23,10 @@ public class FlugEintragenServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	HttpSession session = request.getSession(true);
+    	ServletContext context = getServletContext();
 
-    	String flugDataName = "../webapps/Skywings/WEB-INF/save/saveflug";
-		String baseFlughafenPath = "../webapps/Skywings/WEB-INF/save/flughafen/";
+    	String flugDataName = context.getInitParameter("flugpath");
+		String baseFlughafenPath = context.getInitParameter("flughafenpath");
         FlugDAO flugDAO = new SerializedFlugDAO(flugDataName);
         
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd@HH:mm");

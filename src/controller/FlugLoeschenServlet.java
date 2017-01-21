@@ -23,8 +23,9 @@ public class FlugLoeschenServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//String dataName = "C:\\Users\\Paul\\Documents\\Vorlesungen\\3. Semester\\SWE\\tomcat\\webapps\\skywings\\WEB-INF\\save\\saveflug.ser";
-		String dataName = "../webapps/skywings/WEB-INF/save/saveflug";
+		ServletContext context = getServletContext();
+
+		String dataName = context.getInitParameter("flugpath");
 		FlugDAO flugDAO = new SerializedFlugDAO(dataName);
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
 
