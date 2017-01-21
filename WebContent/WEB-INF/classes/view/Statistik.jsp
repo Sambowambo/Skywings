@@ -3,7 +3,7 @@
     <%@page import="java.util.List"%>
     <%@page import="controller.StatistikController"%>
    <%
-Integer meinpassaggier = (Integer) request.getAttribute("minPassagier");
+Double meinpassaggier = (Double) request.getAttribute("minPassagier");
 %>
 
 <!DOCTYPE html>
@@ -32,7 +32,8 @@ Integer meinpassaggier = (Integer) request.getAttribute("minPassagier");
 <div class="well well-lg">
 <h2>Allgemeine Statistik Übersicht: </h2>
 
-
+<% StatistikController psm = new StatistikController();%> 
+<%=psm.Zeitintensitaet() %>
 
 		<form action="StatistikServlet" method="post">
 			<label for="username">Date 1: </label> 
@@ -43,7 +44,7 @@ Integer meinpassaggier = (Integer) request.getAttribute("minPassagier");
 		<button type="submit" class="btn btn-default">go</button>
 	</form>
 		<% if( meinpassaggier != null){ %>
-	min. Pass : <%= meinpassaggier%>
+	max. Pass : <%= meinpassaggier%>
 
 <%}%>
 

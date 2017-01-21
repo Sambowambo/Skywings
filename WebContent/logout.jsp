@@ -22,7 +22,7 @@
 			<% session.invalidate(); %>
 
 			<br/><br/>
-			<a href="/skywings">Zur ersten Seite zurück</a></p>
+			<a href="/Skywings">Zur ersten Seite zurück</a></p>
 		</div>
 	</body>
 </html>

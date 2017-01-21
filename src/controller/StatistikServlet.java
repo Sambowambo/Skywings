@@ -55,7 +55,7 @@ public class StatistikServlet extends HttpServlet {
 		
 		// java code liste /// varibale
 		
-		int x = sc.minPassagieren(date_1,date_2);
+		double x = sc.avgPreis(date_1,date_2);
 		//sm.ergktrjehl()
 		
 		
