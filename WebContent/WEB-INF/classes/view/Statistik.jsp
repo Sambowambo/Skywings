@@ -33,6 +33,7 @@ Integer meinpassaggier = (Integer) request.getAttribute("minPassagier");
 <h2>Allgemeine Statistik Übersicht: </h2>
 
 
+
 		<form action="StatistikServlet" method="post">
 			<label for="username">Date 1: </label> 
 			<input type="text" class="form-control" id="date1" name="date1" >
