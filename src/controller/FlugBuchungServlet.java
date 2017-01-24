@@ -25,7 +25,7 @@ public class FlugBuchungServlet extends HttpServlet {
 		request.setAttribute("selFlug",selFlug);
 		request.setAttribute("n_passagier", n_passagier);
 
-		if(selFlug == null)
+		if(selFlug.isEmpty())
 			throw new IllegalArgumentException("Sie haben das Flug noch nicht gewaelht.");
 
 		request.getRequestDispatcher("/WEB-INF/classes/view/buchung-add-passagier.jsp").include(request, response);
