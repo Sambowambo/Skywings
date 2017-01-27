@@ -52,7 +52,7 @@
 		<div class="jumbotron">
 			<h1>Es gibt ein Fehler beim Prozess!</h1>
 			<br>
-			<p class="lead">Bitte buchen Sie noch einmal. Wie entschuldigen uns dafuer.</p>
+			<p class="lead">Bitte buchen Sie noch einmal. Wir entschuldigen uns fuer die Unannehmlichkeiten.</p>
 			<br/><br/>
 			<p><a href="/skywings">Zur ersten Seite zurück</a></p>
 		</div>

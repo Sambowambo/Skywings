@@ -15,7 +15,7 @@
 		<%@ page session="true"%>
 
 		<div class="jumbotron">
-			<h1>Skywings Prototyp I</h1>
+			<h1>Skywings Prototyp II</h1>
 			<br/><br/>
 			<p>User <span style="font-weight:bold;"><%=request.getRemoteUser()%></span> wird abgemeldet.
 

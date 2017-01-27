@@ -72,7 +72,8 @@
 				</div>
 				<div class="col-md-3">
 					<br>
-					<button type="submit" class="btn btn-default">Suchen</button>
+					
+					<button class="btn btn-primary" type="submit">Suchen</button>
 				</div>
 			</div>
 			</form>
