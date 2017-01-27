@@ -45,34 +45,10 @@
 		ArrayList<String> abOrtList = (ArrayList<String>)request.getAttribute("abOrtList");
 		ArrayList<String> anOrtList = (ArrayList<String>)request.getAttribute("anOrtList");
 		%>
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-						Menu <i class="fa fa-bars"></i>
-					</button>
-					<a class="navbar-brand page-scroll" href="/Skywings">
-						<i class="fa fa-plane"></i> <span style="font-weight:bold">SKYWINGS</span> Prototyp I
-					</a>
-				</div>
-
-				<%
-				if(request.getRemoteUser() != null) {
-				%>
-					<div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-						<ul class="nav navbar-nav">
-							<li><a class="page-scroll" href="#">User: <%= request.getRemoteUser() %></a></li>
-							<li><a class="page-scroll" href="logout.jsp">Sign Out</a></li>
-						</ul>
-					</div>
-				<%
-				}
-				%>
-			</div>
-		</nav>
+		<jsp:include page="navbar.jsp"></jsp:include>
 
 		<div class="jumbotron">
-			<h1>Skywings Prototyp I</h1>
+			<h1>Skywings Prototyp II</h1>
 			<p class="lead" style="margin-top:15px;">Alle Fluege sind hier zu buchen</p>
 		</div>
 		
