@@ -112,6 +112,40 @@ public class SerializedBuchungDAO implements BuchungDAO, Serializable{
             return false;
         }
 	}
+	public boolean bearbeiteBuchung(Buchung buchung)
+	{
+		ArrayList<Buchung> buchungList = getBuchungList();
+		String id = buchung.getBuchungid();
+		
+		
+		for(Buchung iter:buchungList){
+        	if(iter.getBuchungid().equals(id)){
+        		iter.setEmail(buchung.getEmail());
+        		iter.setTelefonnummer(buchung.getTelefonnummer());
+        		iter.setPassagier(buchung.getPassagier());
+        		
+        		
+        	}
+        	
+		}
+        		//throw new IllegalArgumentException("Tut mir leid! Es gibt schon eine Buchung mit dieser Id!");
+
+		try {
+            FileOutputStream fos = new FileOutputStream(dataName);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(buchungList);
+
+            oos.close();
+            fos.close();
+
+            return true;
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+	}
 
 	@Override
 	public boolean loescheBuchung(Buchung buchung) {
