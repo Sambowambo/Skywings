@@ -82,12 +82,12 @@
 			<div class="row">
 				<div class="col-md-3">
 					<label for="Abflugort">Abflugort:</label><br>
-					<input type="text" id="Abflugort" name="Abflugort" class="form-control" placeholder="Abflugort zB Wien">
+					<input type="text" id="ab_ort" name="Abflugort" class="form-control" placeholder="Abflugort zB Wien">
 				</div>
 				
 				<div class="col-md-3">
 					<label for="Ankunftsort">Ankunftsort:</label><br>
-					<input type="text" id="Ankunftsort" name="Ankunftsort" class="form-control" placeholder="Ankunftsort zB London">
+					<input type="text" id="an_ort" name="Ankunftsort" class="form-control" placeholder="Ankunftsort zB London">
 				</div>
 				
 				<div class="col-md-3">
@@ -100,8 +100,7 @@
 				</div>
 			</div>
 			</form>
-			<% String test = (String)request.getAttribute("test"); %>
-			<%= test %>
+		
 		</div>
 
 		<div class="container">
