@@ -45,34 +45,10 @@
 		ArrayList<String> abOrtList = (ArrayList<String>)request.getAttribute("abOrtList");
 		ArrayList<String> anOrtList = (ArrayList<String>)request.getAttribute("anOrtList");
 		%>
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-						Menu <i class="fa fa-bars"></i>
-					</button>
-					<a class="navbar-brand page-scroll" href="/Skywings">
-						<i class="fa fa-plane"></i> <span style="font-weight:bold">SKYWINGS</span> Prototyp I
-					</a>
-				</div>
-
-				<%
-				if(request.getRemoteUser() != null) {
-				%>
-					<div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-						<ul class="nav navbar-nav">
-							<li><a class="page-scroll" href="#">User: <%= request.getRemoteUser() %></a></li>
-							<li><a class="page-scroll" href="logout.jsp">Sign Out</a></li>
-						</ul>
-					</div>
-				<%
-				}
-				%>
-			</div>
-		</nav>
+		<jsp:include page="navbar.jsp"></jsp:include>
 
 		<div class="jumbotron">
-			<h1>Skywings Prototyp I</h1>
+			<h1>Skywings Prototyp II</h1>
 			<p class="lead" style="margin-top:15px;">Alle Fluege sind hier zu buchen</p>
 		</div>
 		
@@ -82,12 +58,12 @@
 			<div class="row">
 				<div class="col-md-3">
 					<label for="Abflugort">Abflugort:</label><br>
-					<input type="text" id="Abflugort" name="Abflugort" class="form-control" placeholder="Abflugort zB Wien">
+					<input type="text" id="ab_ort" name="Abflugort" class="form-control" placeholder="Abflugort zB Wien">
 				</div>
 				
 				<div class="col-md-3">
 					<label for="Ankunftsort">Ankunftsort:</label><br>
-					<input type="text" id="Ankunftsort" name="Ankunftsort" class="form-control" placeholder="Ankunftsort zB London">
+					<input type="text" id="an_ort" name="Ankunftsort" class="form-control" placeholder="Ankunftsort zB London">
 				</div>
 				
 				<div class="col-md-3">
@@ -96,12 +72,12 @@
 				</div>
 				<div class="col-md-3">
 					<br>
-					<button type="submit" class="btn btn-default">Suchen</button>
+					
+					<button class="btn btn-primary" type="submit">Suchen</button>
 				</div>
 			</div>
 			</form>
-			<% String test = (String)request.getAttribute("test"); %>
-			<%= test %>
+		
 		</div>
 
 		<div class="container">

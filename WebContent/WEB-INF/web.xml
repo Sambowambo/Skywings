@@ -12,7 +12,6 @@
     <param-name>flughafenpath</param-name>
     <param-value>../webapps/Skywings/WEB-INF/save/flughafen/</param-value>
   </context-param>
-
   <servlet>
     <servlet-name>FlugManagementServlet</servlet-name>
     <servlet-class>controller.FlugManagementServlet</servlet-class>
@@ -38,6 +37,14 @@
     <servlet-class>controller.BuchungAnsehenServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>BuchungSpeichernServlet</servlet-name>
+    <servlet-class>controller.BuchungSpeichernServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PassagiereSpeichernServlet</servlet-name>
+    <servlet-class>controller.PassagiereSpeichernServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>StatistikServlet</servlet-name>
     <servlet-class>controller.StatistikServlet</servlet-class>
   </servlet>
@@ -45,7 +52,6 @@
     <servlet-name>FlugSucheServlet</servlet-name>
     <servlet-class>controller.FlugSucheServlet</servlet-class>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>FlugManagementServlet</servlet-name>
     <url-pattern>/management</url-pattern>
@@ -69,6 +75,14 @@
   <servlet-mapping>
     <servlet-name>BuchungAnsehenServlet</servlet-name>
     <url-pattern>/buchungansehen</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>BuchungSpeichernServlet</servlet-name>
+    <url-pattern>/buchungspeichern</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>PassagiereSpeichernServlet</servlet-name>
+    <url-pattern>/passagierespeichern</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>StatistikServlet</servlet-name>

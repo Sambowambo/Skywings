@@ -11,4 +11,5 @@ public interface BuchungDAO {
 	 public boolean loescheBuchung(Buchung buchung);
 	 //test getBuchungbyMail
 	 public Buchung getBuchungbyMail(String mail);
+	 public boolean bearbeiteBuchung(Buchung buchung);
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.buchung.Buchung;
 import model.buchung.dao.BuchungDAO;
 import model.buchung.dao.SerializedBuchungDAO;
 
@@ -33,8 +34,10 @@ public class BuchungAnsehenServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 		request.getRequestDispatcher("/WEB-INF/classes/view/buchungansehen.jsp").include(request, response);
 		response.setContentType("text/html");
+		
 	}
 
 	/**
@@ -48,6 +51,7 @@ public class BuchungAnsehenServlet extends HttpServlet {
 		
 		String bnr = "";
 		bnr = request.getParameter("bnr");
+
 		
 		//int indexofticket = Integer.parseInt(bnr.substring(bnr.length(),bnr.length()));
 		try {
@@ -73,8 +77,19 @@ public class BuchungAnsehenServlet extends HttpServlet {
 			request.setAttribute("bbr", false);
 		}
 		
+	
+		//String mail = request.getParameter("HiddenMail");
+		//String bknr = request.getParameter("HiddenBookingnr");
+		//request.setAttribute("testname", mail);
+		//Buchung booking = bdao.getBuchungbyId(bknr);
+		//bdao.bearbeiteBuchung(booking);
+		
+		
+		//request.getRequestDispatcher("buchungansehen").include(request, response);
 		request.getRequestDispatcher("/WEB-INF/classes/view/buchungansehen.jsp").forward(request, response);
+		//response.sendRedirect("buchungansehen");
 		response.setContentType("text/html");
+		
 	}
 
 }
