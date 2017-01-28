@@ -64,7 +64,7 @@ public class Flug implements Serializable {
     public Date getAnkunftsdatum() { return ankunftsdatum; }
     public void setAnkunftsdatum(Date _ankunftsdatum) { this.ankunftsdatum = _ankunftsdatum; }
 
-    public int getSitzplatzIndex(Sitzplatz _sitzplatz) { return (_sitzplatz.getSpalte()-1)*N_Sitzspalte + _sitzplatz.getZeile()-1; }
+    public int getSitzplatzIndex(Sitzplatz _sitzplatz) { return (_sitzplatz.getZeile()-1)*N_Sitzspalte + _sitzplatz.getSpalte()-1; }
 
     public int anzahlFreiplatz() {
         int counter = 0;
@@ -85,7 +85,7 @@ public class Flug implements Serializable {
     }
 
     public String toString() {
-        String rts = new String();
+        String rts = "";
         rts += flugnr + " " +
                 df.format(abflugsdatum) + " " +
                 df.format(ankunftsdatum) + " " +
