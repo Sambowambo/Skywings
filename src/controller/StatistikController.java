@@ -50,12 +50,15 @@ public class StatistikController {
 				String flugnummer = flugcode[0];
 				
 			 frei = flugdao.getFlugbyNummer(flugnummer).anzahlFreiplatz();
-			 
 			 preis = flugdao.getFlugbyNummer(flugnummer).getSitzplatz().get(i).getPreis();
 				
 			  		sumsitz+=(sitzplatz-frei);
 					sum+= (sitzplatz-frei)*preis; 
 			}
+			if (sumsitz==0){
+				return 0;
+			}
+		
 			return sum/sumsitz;
 			
 			
@@ -73,6 +76,7 @@ public class StatistikController {
 				String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
 				String flugnummer = flugcode[0];
 			 frei = flugdao.getFlugbyNummer(flugnummer).anzahlFreiplatz();
+			
 				
 			  preis = flugdao.getFlugbyNummer(flugnummer).getSitzplatz().get(i).getPreis();
 				
@@ -103,7 +107,9 @@ public class StatistikController {
 		//v
 		public int minPassagieren(Date date1, Date date2){
 		
-		
+			   if (date1==null || date2==null) {
+		        	 return -1;
+		         }
 			ArrayList <Integer> passag = new ArrayList<Integer>();
 			for(int i = 0 ; i <gesamtzahlFluegen(); i++){
 				String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
@@ -119,11 +125,13 @@ public class StatistikController {
 				}
 				
 				if (date1.before(ab_datum) && date2.after(ab_datum)) {
-					passag.add(sitzplatz-flugdao.getFlugbyNrandDatum(flugcode[0], ab_datum).anzahlFreiplatz());
+					passag.add(sitzplatz-flugdao.getFlugbyNrandDatum(flugcode[0], 
+							ab_datum).anzahlFreiplatz());
 				}
+				
 			}
 			
-			if(passag.size() == 0) return 0;
+			if(passag.size() == 0) return -1;
 			else {
 				int min=passag.get(0);
 				
@@ -139,7 +147,9 @@ public class StatistikController {
 		//v
 		public int maxPassagieren(Date date1, Date date2){
 			
-			
+			   if (date1==null || date2==null) {
+		        	 return -1;
+		         }
 			ArrayList <Integer> passag = new ArrayList<Integer>();
 			for(int i = 0 ; i <gesamtzahlFluegen(); i++){
 				String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
@@ -154,11 +164,12 @@ public class StatistikController {
 					return -1;
 				}
 				if (date1.before(ab_datum) && date2.after(ab_datum)) {
-					passag.add(sitzplatz-flugdao.getFlugbyNrandDatum(flugcode[0], ab_datum).anzahlFreiplatz());
+					passag.add(sitzplatz-flugdao.getFlugbyNrandDatum(flugcode[0],
+							ab_datum).anzahlFreiplatz());
 				}
 			}
 			
-			if(passag.size() == 0) return 0;
+			if(passag.size() == 0) return -1;
 			else {
 			int max=passag.get(0);
 			
@@ -173,7 +184,9 @@ public class StatistikController {
 		
 		//v
 	public int avgPassagieren(Date date1, Date date2){
-		
+		   if (date1==null || date2==null) {
+	        	 return 0;
+	         }
 			
 			int sum=0;
 			int g=0;
@@ -191,9 +204,14 @@ public class StatistikController {
 					return -1;
 				}
 				if (date1.before(ab_datum) && date2.after(ab_datum)) {
-				  sum+=sitzplatz-flugdao.getFlugbyNrandDatum(flugcode[0], ab_datum).anzahlFreiplatz();
+				  sum+=sitzplatz-flugdao.getFlugbyNrandDatum(flugcode[0],
+						  ab_datum).anzahlFreiplatz();
 				  g++;
 				}
+			}
+			
+			if (g==0){
+				return 0;
 			}
 			return sum/g;
 					
@@ -204,7 +222,9 @@ public class StatistikController {
 	
 	//v
 	public double minPreis(Date date1, Date date2){
-
+         if (date1==null || date2==null) {
+        	 return 0;
+         }
 		double preis;
 		
 		ArrayList <Double> passag = new ArrayList<Double>();
@@ -222,8 +242,10 @@ public class StatistikController {
 			}
 			if (date1.before(ab_datum) && 
 					date2.after(ab_datum)) {
-				preis = flugdao.getFlugbyNrandDatum(flugcode[0], ab_datum).getSitzplatz().get(i).getPreis();
-				passag.add((sitzplatz-flugdao.getFlugbyNrandDatum(flugcode[0], ab_datum).anzahlFreiplatz())*preis);
+				preis = flugdao.getFlugbyNrandDatum(flugcode[0], 
+						ab_datum).getSitzplatz().get(i).getPreis();
+				passag.add((sitzplatz-flugdao.getFlugbyNrandDatum(flugcode[0], 
+						ab_datum).anzahlFreiplatz())*preis);
 			}
 		}
 		
@@ -243,7 +265,9 @@ public class StatistikController {
 	//v
 	
 	public double maxPreis(Date date1, Date date2){
-
+		   if (date1==null || date2==null) {
+	        	 return 0;
+	         }
 		double preis;
 		
 		ArrayList <Double> passag = new ArrayList<Double>();
@@ -261,8 +285,10 @@ public class StatistikController {
 			}
 			if (date1.before(ab_datum) && 
 					date2.after(ab_datum)) {
-				preis = flugdao.getFlugbyNrandDatum(flugcode[0], ab_datum).getSitzplatz().get(i).getPreis();
-				passag.add((sitzplatz-flugdao.getFlugbyNrandDatum(flugcode[0], ab_datum).anzahlFreiplatz())*preis);
+				preis = flugdao.getFlugbyNrandDatum(flugcode[0], 
+						ab_datum).getSitzplatz().get(i).getPreis();
+				passag.add((sitzplatz-flugdao.getFlugbyNrandDatum(flugcode[0], 
+						ab_datum).anzahlFreiplatz())*preis);
 			}
 		}
 		
@@ -283,7 +309,9 @@ public class StatistikController {
 	//v
 public double avgPreis(Date date1, Date date2){
 	
-		
+	   if (date1==null || date2==null) {
+      	 return 0;
+       }
 		int sum=0;
 		int g=0;
 		double preis;
@@ -301,10 +329,15 @@ public double avgPreis(Date date1, Date date2){
 				return -1;
 			}
 			if (date1.before(ab_datum) && date2.after(ab_datum)) {
-				preis = flugdao.getFlugbyNrandDatum(flugcode[0], ab_datum).getSitzplatz().get(i).getPreis();
-				sum+=(sitzplatz-flugdao.getFlugbyNrandDatum(flugcode[0], ab_datum).anzahlFreiplatz())*preis;
+				preis = flugdao.getFlugbyNrandDatum(flugcode[0], 
+						ab_datum).getSitzplatz().get(i).getPreis();
+				sum+=(sitzplatz-flugdao.getFlugbyNrandDatum(flugcode[0], 
+						ab_datum).anzahlFreiplatz())*preis;
 			  g++;
 			}
+		}
+		if (g==0){
+			return 0;
 		}
 		return sum/g;
 				
@@ -317,7 +350,7 @@ public String Zeitintensitaet(){
 	//zeiten[0]..morgen, zeiten[1]..vormittag,zeiten[2]..mittag,zeiten[3]..nachmittag,zeiten[4]..abend,zeiten[5]..nacht
 	int zeiten [] = new int []{0,0,0,0,0,0};
 	
-	int maxintensitaet;
+	//int maxintensitaet;
 	String maxzeit="";
 	
 	for (int i=0; i<gesamtzahlFluegen(); i++){
@@ -331,75 +364,125 @@ public String Zeitintensitaet(){
 		catch (ParseException e) {
 			e.printStackTrace();
 		}
-
 		switch(ab_datum.getHours()){
 		case 6: case 7: case 8: case 9: case 10: 
-			zeiten[0]++;
+			zeiten[0]+=1;
 			break;
 		case 11: case 12: 
-			zeiten[1]++;
+			zeiten[1]+=1;
 			break;
 		case 13:
-			zeiten[2]++;
+			zeiten[2]+=1;
 			break;
 		case 14: case 15: case 16: case 17:
-			zeiten[3]++;
+			zeiten[3]+=1;
 			break;
 		case 18: case 19: case 20: case 21: case 22: case 23: case 0:
-			zeiten[4]++;
+			zeiten[4]+=1;
 			break;
 		case 1: case 2: case 3: case 4: case 5:
-			zeiten[5]++;
+			zeiten[5]+=1;
 			break;
-			//default:; 
+		default: break;
 			}
 	}
 	
-	maxintensitaet=SortZeit(zeiten);
+	int currentMax = zeiten[0];
+	for(int i = 0; i < zeiten.length; i++){
+	if(currentMax < zeiten[i] ){
+		currentMax=i;
+	}}
 	
-	for(int i =0;i<zeiten.length;i++)
+	int g=0;
+	int j=0;
+	
+	if (zeiten[0] > zeiten[1] && zeiten[0] > zeiten[2]) 
 	{
-		if(zeiten[0]==maxintensitaet)
-		{
-			maxzeit=maxzeit+" morgen: "+maxintensitaet;
-		}
-		else if(zeiten[1]==maxintensitaet)
-		{
-			maxzeit=maxzeit+" vormittag: "+maxintensitaet;			
-		}
-		else if(zeiten[2]==maxintensitaet)
-		{
-			maxzeit=maxzeit+" mittag: "+maxintensitaet;
-		}
-		else if(zeiten[3]==maxintensitaet)
-		{
-			maxzeit=maxzeit+" nachmittag: "+maxintensitaet;
-		}
-		else if(zeiten[4]==maxintensitaet)
-		{
-			maxzeit=maxzeit+" abend: "+maxintensitaet;
-		}
-		else if(zeiten[5]==maxintensitaet)
-		{
-			maxzeit=maxzeit+" nacht: "+maxintensitaet;
-		}
+		 g=0; j=zeiten[0]; 
+		 }
+	
+	if (zeiten[1] > zeiten[0] && zeiten[1] > zeiten[2])
+	{
+	     g=1; j=zeiten[1]; 
+	     }
+	
+	if (zeiten[2] > zeiten[0] && zeiten[2] > zeiten[1])
+	{
+	      g=2; j=zeiten[2]; 
+	      }
+	      
+	
+	int j1=0;
+    int g1=0;
+    
+    
+    if (zeiten[3] > zeiten[4] && zeiten[3] > zeiten[5]) 
+	{
+    	g1=3; j1=zeiten[3];
+		 }
+	
+	if (zeiten[4] > zeiten[3] && zeiten[4] > zeiten[5])
+	{
+		g1=4; j1=zeiten[4];
+	     }
+	
+	if (zeiten[5] > zeiten[3] && zeiten[5] > zeiten[4])
+	     {
+	    	 g1=5; j1=zeiten[5];
+	      }
+	
+	if (j1>j) {
+		  g=g1;
+	  }
+	  /**      
+	if (a>b)
+    {
+    if (a>c) {g=0; j=zeiten[0];}
+    else
+            {
+            if (b>c) { g=1; j=zeiten[1];}
+            else { g=2; j=zeiten[2];}
+            };
+    };
+    
+    int j1=0;
+    int g1=0;
+    
+    if (d>e)
+    {
+    if (d>f) { g1=3; j1=zeiten[3];}
+    else
+            {
+            if (e>f) { g1=4; j1=zeiten[4];}
+            else { g1=5; j1=zeiten[5];}
+            };
+    };
+	
+  if (j1>j) {
+	  g=g1;
+  }
+	 **/
+
+	switch (g) {
+	case 0: maxzeit="Morgen"; 
+				break;
+	case 1: maxzeit="Vormittag"; 
+			break;
+	case 2: maxzeit="Mittag"; 
+			break;
+	case 3: maxzeit="Nachmittag"; 
+			break;
+	case 4: maxzeit="Abend"; 
+			break;
+	case 5: maxzeit="Nacht"; 
+			break;
+	
+	default: break;
 	}
 	
 	
 	return maxzeit;
 	
-	
-	
-	
-	
-}
-
-public int SortZeit(int zeiten[])
-{
-	
-	Arrays.sort(zeiten); 
-	
-	return zeiten[0];
 }
 
 	

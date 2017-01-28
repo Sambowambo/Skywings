@@ -81,6 +81,9 @@
   <security-role>
     <role-name>fluggesellschaft</role-name>
   </security-role>
+  <security-role>
+    <role-name>statistik</role-name>
+  </security-role>
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>management page</web-resource-name>
@@ -88,6 +91,15 @@
     </web-resource-collection>
     <auth-constraint>
       <role-name>fluggesellschaft</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>stistik page</web-resource-name>
+      <url-pattern>/statistik</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>statistik</role-name>
     </auth-constraint>
   </security-constraint>
   <login-config>
