@@ -65,7 +65,7 @@ public class FlugManagementServlet extends HttpServlet {
 		ArrayList<String> b_datList = new ArrayList<>();
 		ArrayList<String> b_emailList = new ArrayList<>();
 		ArrayList<String> b_telList = new ArrayList<>();
-		ArrayList<String> b_flugcodeList = new ArrayList<>();
+		ArrayList<String> b_bnummerList = new ArrayList<>();
 		ArrayList<Integer> b_anzPassagierList = new ArrayList<>();
 		ArrayList<Buchung> buchungList = buchungDAO.getBuchungList();
 
@@ -73,14 +73,14 @@ public class FlugManagementServlet extends HttpServlet {
 			b_datList.add(bdf.format(iter.getBuchungsdatum()));
 			b_emailList.add(iter.getEmail());
 			b_telList.add(iter.getTelefonnummer());
-			b_flugcodeList.add(iter.getFlugcode());
+			b_bnummerList.add(iter.getBuchungid());
 			b_anzPassagierList.add(iter.getPassagier().size());
 		}
 
 		request.setAttribute("datList", b_datList);
 		request.setAttribute("emailList", b_emailList);
 		request.setAttribute("teList", b_telList);
-		request.setAttribute("flugcodeList", b_flugcodeList);
+		request.setAttribute("bnummerList", b_bnummerList);
 		request.setAttribute("anzPassagierList", b_anzPassagierList);
 
 
@@ -90,7 +90,7 @@ public class FlugManagementServlet extends HttpServlet {
 
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/skywings/management");
+        response.sendRedirect("/Skywings/management");
 		response.setContentType("text/html");
     }
 }

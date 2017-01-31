@@ -46,7 +46,7 @@
 		ArrayList<String> datList = (ArrayList<String>)request.getAttribute("datList");
 		ArrayList<String> emailList = (ArrayList<String>)request.getAttribute("emailList");
 		ArrayList<String> telList = (ArrayList<String>)request.getAttribute("teList");
-		ArrayList<String> flugcodeList = (ArrayList<String>)request.getAttribute("flugcodeList");
+		ArrayList<String> bnummerList = (ArrayList<String>)request.getAttribute("bnummerList");
 		ArrayList<Integer> anzPassList = (ArrayList<Integer>)request.getAttribute("anzPassagierList");
 		%>
 		<jsp:include page="navbar.jsp"></jsp:include>
@@ -219,14 +219,14 @@
 						<div class="col-sm-1 col-md-1"></div>
 						<div class="col-sm-10 col-md-10">
 							<%
-							if(datList == null | emailList == null | telList == null | flugcodeList == null | anzPassList == null) {
+							if(datList == null | emailList == null | telList == null | bnummerList == null | anzPassList == null) {
 							%>
 									<div class="alert alert-danger" role="alert">
 										<strong>Falscher Pfad!</strong>
 										Sie haben direkt an .jsp-Datei gerufen. Bitte laden Sie noch einmal <a href="/management">hier</a>!
 									</div>
 							<%
-								} else if(datList.isEmpty() | emailList.isEmpty() | telList.isEmpty() | flugcodeList.isEmpty() | anzPassList.isEmpty()) {
+								} else if(datList.isEmpty() | emailList.isEmpty() | telList.isEmpty() | bnummerList.isEmpty() | anzPassList.isEmpty()) {
 							%>
 									<div class="alert alert-warning" role="alert">
 										<strong>Keine Liste!</strong>
@@ -241,7 +241,7 @@
 										<th>Buchungsdatum</th>
 										<th>E-mail</th>
 										<th>Telefonnummer</th>
-										<th>Flugcode</th>
+										<th>Buchungsnummer</th>
 										<th>Anzahl Passagieren</th>
 									</tr>
 								</thead>
@@ -253,7 +253,7 @@
 										<td><%= datList.get(i) %></td>
 										<td class="tcenter"><%= emailList.get(i) %></td>
 										<td class="tcenter"><%= telList.get(i) %></td>
-										<td class="tcenter"><%= flugcodeList.get(i) %></td>
+										<td class="tcenter"><%= bnummerList.get(i) %></td>
 										<td class="tcenter"><%= anzPassList.get(i) %></td>
 									</tr>
 									<%
