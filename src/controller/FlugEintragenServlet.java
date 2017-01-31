@@ -28,7 +28,7 @@ public class FlugEintragenServlet extends HttpServlet {
     	String flugDataName = context.getInitParameter("flugpath");
 		String baseFlughafenPath = context.getInitParameter("flughafenpath");
         FlugDAO flugDAO = new SerializedFlugDAO(flugDataName);
-        
+
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
 
         String flugnr = request.getParameter("flugnr");
@@ -68,23 +68,6 @@ public class FlugEintragenServlet extends HttpServlet {
 			String fland = br.readLine();
 			String fstadt = br.readLine();
 
-			/*if(fname.startsWith("Name: "))
-				neuFlughafen.setName(fname.substring("Name: ".length()));
-			else
-				return null;
-
-			neuFlughafen.setCode(fcode);
-
-			if(fland.startsWith("Land: "))
-				neuFlughafen.setLand(fland.substring("Land: ".length()));
-			else
-				return null;
-
-			if(fstadt.startsWith("Stadt: "))
-				neuFlughafen.setStadt(fstadt.substring("Stadt: ".length()));
-			else
-				return null;*/
-
 			neuFlughafen.setName(fname);
 			neuFlughafen.setCode(fcode);
 			neuFlughafen.setLand(fland);
@@ -94,7 +77,6 @@ public class FlugEintragenServlet extends HttpServlet {
 		}
 		catch(IOException e) {
 			e.printStackTrace();
-			//return new Flughafen("N/A", "N/A", "N/A", "N/A");
 			throw e;
 		}
     }

@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import model.buchung.dao.BuchungDAO;
+import model.buchung.dao.SerializedBuchungDAO;
 import model.flug.Flug;
 import model.flug.dao.FlugDAO;
 import model.flug.dao.SerializedFlugDAO;
@@ -17,7 +19,7 @@ import model.*;
 public class FlugLoeschenServlet extends HttpServlet {
 	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/skywings/management");
+        response.sendRedirect("/Skywings/management");
 		response.setContentType("text/html");
     }
 
@@ -25,11 +27,18 @@ public class FlugLoeschenServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
 
+		// initialize FlugDAO
 		String dataName = context.getInitParameter("flugpath");
 		FlugDAO flugDAO = new SerializedFlugDAO(dataName);
+
+		// initialize BuchungDAO
+		String buchungDataName = context.getInitParameter("buchungpath");
+		BuchungDAO buchungDAO = new SerializedBuchungDAO(buchungDataName);
+
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
 
-		String[] selectedFlug = request.getParameter("sel-flug").split("#");
+		String flugcode = request.getParameter("sel-flug");
+		String[] selectedFlug = flugcode.split("#");
 		String flugnr = selectedFlug[0];
 		Date abflugsdatum = new Date();
 		try {
@@ -40,8 +49,10 @@ public class FlugLoeschenServlet extends HttpServlet {
 		}
 
 		flugDAO.loescheFlug(flugnr, abflugsdatum);
+		buchungDAO.loescheBuchungVonFlug(flugcode);
 
-		response.sendRedirect("/skywings/management");
+
+		response.sendRedirect("/Skywings/management");
 		response.setContentType("text/html");
 	}
 }

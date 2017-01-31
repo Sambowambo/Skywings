@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 import model.buchung.Buchung;
 
@@ -178,4 +179,30 @@ public class SerializedBuchungDAO implements BuchungDAO, Serializable{
         } else throw new IllegalArgumentException("Tut mir leid! Es gibt keine Buchung mit dieser Id!");
        	return true;
 	}
+
+	@Override
+    public boolean loescheBuchungVonFlug(String flugcode) {
+	    ArrayList<Buchung> buchungList = getBuchungList();
+
+	    for(int i=0; i<buchungList.size(); i++) {
+            if(buchungList.get(i).getFlugcode().equals(flugcode))
+                buchungList.remove(i);
+        }
+
+        try {
+            FileOutputStream fos = new FileOutputStream(dataName);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(buchungList);
+
+            oos.close();
+            fos.close();
+
+            return true;
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
