@@ -15,14 +15,12 @@ import model.flug.dao.SerializedFlugDAO;
 
 public class StatistikController {
 
-	private String buchungDataName = "../webapps/skywings/WEB-INF/save/savebuchung";
-	private String flugDataName = "../webapps/skywings/WEB-INF/save/saveflug";
 	private BuchungDAO buchungdao; 
 	private FlugDAO flugdao;
 	private int sitzplatz=200;
 	
 	
-	public StatistikController() {
+	public StatistikController(String buchungDataName, String flugDataName) {
 		
 		this.buchungdao = new SerializedBuchungDAO(buchungDataName);
 		this.flugdao = new SerializedFlugDAO(flugDataName);
