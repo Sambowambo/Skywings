@@ -15,8 +15,8 @@ import model.flug.dao.SerializedFlugDAO;
 
 public class StatistikController {
 
-	private String buchungDataName = "../webapps/skywings/WEB-INF/save/savebuchung";
-	private String flugDataName = "../webapps/skywings/WEB-INF/save/saveflug";
+	private String buchungDataName = "../webapps/Skywings/WEB-INF/save/savebuchung";
+	private String flugDataName = "../webapps/Skywings/WEB-INF/save/saveflug";
 	private BuchungDAO buchungdao; 
 	private FlugDAO flugdao;
 	private int sitzplatz=200;
@@ -53,7 +53,7 @@ public class StatistikController {
 			double preis;
 			int sumsitz=0;
 		
-			for(int i = 0 ; i <gesamtzahlFluegen(); i++){
+			for(int i = 0 ; i <gesamtzahlBuchungen(); i++){
 				
 				String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
 				String flugnummer = flugcode[0];
@@ -84,7 +84,7 @@ public class StatistikController {
 			double preis;
 			
 		
-			for(int i = 0 ; i <gesamtzahlFluegen(); i++){
+			for(int i = 0 ; i <gesamtzahlBuchungen(); i++){
 				String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
 				String flugnummer = flugcode[0];
 			 frei = flugdao.getFlugbyNummer(flugnummer).anzahlFreiplatz();
@@ -106,7 +106,7 @@ public class StatistikController {
 	
 			int sumpas=0;
 			
-			for(int i = 0 ; i <gesamtzahlFluegen(); i++){
+			for(int i = 0 ; i <gesamtzahlBuchungen(); i++){
 				String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
 				String flugnummer = flugcode[0];
 				 frei = flugdao.getFlugbyNummer(flugnummer).anzahlFreiplatz();
@@ -127,7 +127,7 @@ public class StatistikController {
 		        	 return -1;
 		         }
 			ArrayList <Integer> passag = new ArrayList<Integer>();
-			for(int i = 0 ; i <gesamtzahlFluegen(); i++){
+			for(int i = 0 ; i <gesamtzahlBuchungen(); i++){
 				String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
 				String abflugsdatum = flugcode[1];
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
@@ -169,7 +169,7 @@ public class StatistikController {
 		        	 return -1;
 		         }
 			ArrayList <Integer> passag = new ArrayList<Integer>();
-			for(int i = 0 ; i <gesamtzahlFluegen(); i++){
+			for(int i = 0 ; i <gesamtzahlBuchungen(); i++){
 				String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
 				String abflugsdatum = flugcode[1];
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
@@ -212,7 +212,7 @@ public class StatistikController {
 			int sum=0;
 			int g=0;
 			
-			for(int i = 0 ; i <gesamtzahlFluegen(); i++){
+			for(int i = 0 ; i <gesamtzahlBuchungen(); i++){
 				String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
 				String abflugsdatum = flugcode[1];
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
@@ -252,7 +252,7 @@ public class StatistikController {
 		double preis;
 		
 		ArrayList <Double> passag = new ArrayList<Double>();
-		for(int i = 0 ; i <gesamtzahlFluegen(); i++){
+		for(int i = 0 ; i <gesamtzahlBuchungen(); i++){
 			String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
 			String abflugsdatum = flugcode[1];
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
@@ -298,7 +298,7 @@ public class StatistikController {
 		double preis;
 		
 		ArrayList <Double> passag = new ArrayList<Double>();
-		for(int i = 0 ; i <gesamtzahlFluegen(); i++){
+		for(int i = 0 ; i <gesamtzahlBuchungen(); i++){
 			String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
 			String abflugsdatum = flugcode[1];
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
@@ -346,7 +346,7 @@ public double avgPreis(Date date1, Date date2){
 		int g=0;
 		double preis;
 		
-		for(int i = 0 ; i <gesamtzahlFluegen(); i++){
+		for(int i = 0 ; i <gesamtzahlBuchungen(); i++){
 			String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
 			String abflugsdatum = flugcode[1];
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
