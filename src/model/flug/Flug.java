@@ -35,6 +35,9 @@ public class Flug implements Serializable {
 
     public Flug(String _flugnr, double std_sitzpreis, Flughafen _abflugsort, Flughafen _ankunftsort,
                 Date _abflugsdatum, Date _ankunftsdatum) {
+        if(_ankunftsdatum.before(_abflugsdatum))
+            throw new IllegalArgumentException("Ankunft kann nicht frueher als Abflug sein.");
+
         flugnr = _flugnr;
         abflugsort = _abflugsort;
         ankunftsort = _ankunftsort;
