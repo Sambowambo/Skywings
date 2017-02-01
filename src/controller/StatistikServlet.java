@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/StatistikServlet")
 public class StatistikServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+    private StatistikController sc = new StatistikController();
 
     public StatistikServlet() {
         super();
@@ -40,10 +40,6 @@ public class StatistikServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ServletContext context = getServletContext();
-		String buchungDataName = context.getInitParameter("buchungpath");
-		String flugDataName = context.getInitParameter("flugpath");
-		StatistikController sc = new StatistikController(buchungDataName, flugDataName);
 	
 		String date1 = request.getParameter("date1");
 		String date2 = request.getParameter("date2");

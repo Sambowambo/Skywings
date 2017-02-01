@@ -15,28 +15,39 @@ import model.flug.dao.SerializedFlugDAO;
 
 public class StatistikController {
 
+	private String buchungDataName = "../webapps/skywings/WEB-INF/save/savebuchung";
+	private String flugDataName = "../webapps/skywings/WEB-INF/save/saveflug";
 	private BuchungDAO buchungdao; 
 	private FlugDAO flugdao;
 	private int sitzplatz=200;
 	
 	
-	public StatistikController(String buchungDataName, String flugDataName) {
+	public StatistikController() {
 		
 		this.buchungdao = new SerializedBuchungDAO(buchungDataName);
 		this.flugdao = new SerializedFlugDAO(flugDataName);
 	}
 	//v
 	public int gesamtzahlFluegen(){
+		if(flugdao.getFlugList().size()==0){
+			return -1;
+		}
 		return this.flugdao.getFlugList().size();
 	}
 
 	//v
 	public int gesamtzahlBuchungen(){
+		if(buchungdao.getBuchungList().size()==0){
+			return -1;
+		}
+		
 		return this.buchungdao.getBuchungList().size(); }
 		
 		//v
 		public double durchschnittPreis (){
-		
+		if (buchungdao.getBuchungList().size()==0){
+			return 0;
+		}
 			double sum= 0 ;
 			int frei;
 			double preis;
@@ -65,6 +76,9 @@ public class StatistikController {
 		
 		//v
 		public double gesamtPreis(){
+			if (buchungdao.getBuchungList().size()==0){
+				return 0;
+			}
 			double sum= 0 ;
 			int frei;
 			double preis;
@@ -85,7 +99,9 @@ public class StatistikController {
 		}
 		//v
 		public int gesamtzahlPassagieren(){
-	
+			if (buchungdao.getBuchungList().size()==0){
+				return -1;
+			}
 			int frei;
 	
 			int sumpas=0;
@@ -104,7 +120,9 @@ public class StatistikController {
 		
 		//v
 		public int minPassagieren(Date date1, Date date2){
-		
+			if (buchungdao.getBuchungList().size()==0){
+				return -1;
+			}
 			   if (date1==null || date2==null) {
 		        	 return -1;
 		         }
@@ -144,7 +162,9 @@ public class StatistikController {
 		
 		//v
 		public int maxPassagieren(Date date1, Date date2){
-			
+			if (buchungdao.getBuchungList().size()==0){
+				return -1;
+			}
 			   if (date1==null || date2==null) {
 		        	 return -1;
 		         }
@@ -182,6 +202,9 @@ public class StatistikController {
 		
 		//v
 	public int avgPassagieren(Date date1, Date date2){
+		if (buchungdao.getBuchungList().size()==0){
+			return 0;
+		}
 		   if (date1==null || date2==null) {
 	        	 return 0;
 	         }
@@ -220,6 +243,9 @@ public class StatistikController {
 	
 	//v
 	public double minPreis(Date date1, Date date2){
+		if (buchungdao.getBuchungList().size()==0){
+			return 0;
+		}
          if (date1==null || date2==null) {
         	 return 0;
          }
@@ -263,6 +289,9 @@ public class StatistikController {
 	//v
 	
 	public double maxPreis(Date date1, Date date2){
+		if (buchungdao.getBuchungList().size()==0){
+			return 0;
+		}
 		   if (date1==null || date2==null) {
 	        	 return 0;
 	         }
@@ -306,6 +335,9 @@ public class StatistikController {
 	
 	//v
 public double avgPreis(Date date1, Date date2){
+	if (buchungdao.getBuchungList().size()==0){
+		return 0;
+	}
 	
 	   if (date1==null || date2==null) {
       	 return 0;
@@ -343,7 +375,11 @@ public double avgPreis(Date date1, Date date2){
 	
 @SuppressWarnings("deprecation")
 public String Zeitintensitaet(){
-		
+	if (flugdao.getFlugList().size()==0){
+		return "kann nicht berechnet werden, weil es keinen Flug exestiert";
+	}
+	
+	
 	// zeiten[] beinhaltet die einzelnen zeiten in folgender reihenfolge 
 	//zeiten[0]..morgen, zeiten[1]..vormittag,zeiten[2]..mittag,zeiten[3]..nachmittag,zeiten[4]..abend,zeiten[5]..nacht
 	int zeiten [] = new int []{0,0,0,0,0,0};
@@ -352,16 +388,19 @@ public String Zeitintensitaet(){
 	String maxzeit="";
 	
 	for (int i=0; i<gesamtzahlFluegen(); i++){
-		String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
-		String abflugsdatum = flugcode[1];
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
-		Date ab_datum = null;
+
+		//String[] flugcode = buchungdao.getBuchungList().get(i).getFlugcode().split("#"); // ab123#2016-05-06@12:34
+		Date ab_datum = flugdao.getFlugList().get(i).getAbflugsdatum();
+		/**
+		 * SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
+		 
 		try {
 			ab_datum = sdf.parse(abflugsdatum);
 		}
 		catch (ParseException e) {
 			e.printStackTrace();
-		}
+		}*/
+		
 		switch(ab_datum.getHours()){
 		case 6: case 7: case 8: case 9: case 10: 
 			zeiten[0]+=1;

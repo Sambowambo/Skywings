@@ -195,14 +195,21 @@ String date2 = (String) request.getAttribute("date2");
 	</div>
 
 <div id="g4">
-		<% if( gesamtFlug != 0){ %>
+		<% if( gesamtFlug != 0 && gesamtFlug!=-1){ %>
 			<strong>Gesamtanzahl der Flügen : <%= gesamtFlug%></strong>
+		<%}%>
+		<% if( gesamtFlug==-1){ %>
+			<strong>Gesamtanzahl der Flügen : 0</strong>
 		<%}%>
 	</div>
 	
 	<div id="g5">
-		<% if( gesamtBuch != 0){ %>
+		<% if( gesamtBuch != 0 && gesamtBuch!=-1){ %>
 			<strong>Gesamtanzahl der Buchungen : <%= gesamtBuch%></strong>
+		<%}%>
+		
+		<% if( gesamtBuch==-1){ %>
+			<strong>Gesamtanzahl der Buchungen : 0</strong>
 		<%}%>
 	</div>
 	
@@ -213,8 +220,12 @@ String date2 = (String) request.getAttribute("date2");
 	</div>
 	
 	<div id="g7">
-		<% if( gesamPass != 0){ %>
+		<% if( gesamPass != 0 && gesamPass!=-1){ %>
 			<strong>Gesamtanzahl der Passagieren : <%= gesamPass%></strong>
+		<%}%>
+		
+		<% if(gesamPass == -1){ %>
+			<strong>Gesamtanzahl der Passagieren : 0</strong>
 		<%}%>
 	</div>
 	
