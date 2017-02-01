@@ -169,10 +169,10 @@ String date2 = (String) request.getAttribute("date2");
 
 		<center>
 			<label for="username" id ="lable1" >Date 1: </label> 
-			<input type="text" class="form-control" id="date1" name="date1" placeholder="yyyy-MM-dd"  >
+			<input type="date" value="2017-01-01" class="form-control" id="date1" name="date1" placeholder="yyyy-MM-dd"  >
 			<br>
 			<label for="username" id ="lable1" >Date 2: </label> 
-			<input type="text" class="form-control" id="date2" name="date2" placeholder="z.B.: 2017-12-12" >
+			<input type="date" value="2017-01-01" class="form-control" id="date2" name="date2" placeholder="z.B.: 2017-12-12" >
 			<br>
 		<button type="submit" class="btn btn-warning">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Go&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
