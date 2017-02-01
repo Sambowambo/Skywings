@@ -46,7 +46,7 @@ public class FlugController  {
 		return flugDAO.loescheFlug(flugDAO.getFlugbyId(flugid));
 	}
 	
-	//klassendiagramm ändern
+	//klassendiagramm ?ndern
 	public Flug flugSuche(int flugid){
 		return flugDAO.getFlugbyId(flugid);
 	}*/
