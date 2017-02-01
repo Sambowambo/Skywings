@@ -62,7 +62,7 @@
 .navbar-wrapper .navbar {
 	padding-right: 15px;
 	padding-left: 15px;
-	border-radius: 5px;
+	border-radius: 8px 8px 0px 0px;
 }
 .navbar-wrapper .navbar .container {
 	width: auto;
@@ -70,3 +70,15 @@
 .navbar-brand {
 	color: #710193;
 }
+
+
+.content-index {
+	border-radius: 5px;
+	background-color: #eee;
+	margin-top: -10px;
+}
+
+.autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
+.autocomplete-suggestion { padding: 10px 5px; font-size: 1.2em; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #f0f0f0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399ff; }

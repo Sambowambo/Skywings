@@ -20,22 +20,90 @@ import model.flug.dao.SerializedFlugDAO;
 
 
 public class FlugSucheServlet extends HttpServlet {
+	private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	private DecimalFormat decf = new DecimalFormat("0.00");
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		ServletContext context = getServletContext();
-		HttpSession ss = request.getSession();
 
 		String flugDataName = context.getInitParameter("flugpath");
 		FlugDAO flugDAO = new SerializedFlugDAO(flugDataName);
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd@HH:mm");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		DecimalFormat decf = new DecimalFormat("0.00");
-		
-		String sabflug = (String)ss.getAttribute("sabflug");
-		String sankunft = (String)ss.getAttribute("sankunft");
-		String sdatum = (String)ss.getAttribute("sdatum");
+		ArrayList<Flug> flugList = flugDAO.getFlugList();
+
+		String abflug = request.getParameter("Abflugort");
+		String ankunft = request.getParameter("Ankunftsort");
+		//String hin_option = request.getParameter("hr_flug");
+		String h_datum = request.getParameter("hin_datum");
+		//String r_datum = request.getParameter("rueck_dadt");
+
+		// ArrayList for Hinflug
+		ArrayList<String> h_flugnrList = new ArrayList<>();
+		ArrayList<String> h_preisList = new ArrayList<>();
+		ArrayList<Integer> h_freiplatzList = new ArrayList<>();
+		ArrayList<String> h_abDatList = new ArrayList<>();
+		ArrayList<String> h_anDatList = new ArrayList<>();
+		ArrayList<String> h_abOrtList = new ArrayList<>();
+		ArrayList<String> h_anOrtList = new ArrayList<>();
+
+		// ArrayList for Rueckflug
+		/*ArrayList<String> r_flugnrList = new ArrayList<>();
+		ArrayList<String> r_preisList = new ArrayList<>();
+		ArrayList<Integer> r_freiplatzList = new ArrayList<>();
+		ArrayList<String> r_abDatList = new ArrayList<>();
+		ArrayList<String> r_anDatList = new ArrayList<>();
+		ArrayList<String> r_abOrtList = new ArrayList<>();
+		ArrayList<String> r_anOrtList = new ArrayList<>();*/
+
+		// Hin-List operations
+		ArrayList<Flug> h_flugList = searchFlug(abflug, ankunft, h_datum, flugList);
+		for(Flug iter:h_flugList) {
+			h_flugnrList.add(iter.getFlugnr());
+			h_preisList.add(decf.format(iter.getSitzplatz().get(0).getPreis()));
+			h_freiplatzList.add(iter.anzahlFreiplatz());
+			h_abDatList.add(df.format(iter.getAbflugsdatum()));
+			h_anDatList.add(df.format(iter.getAnkunftsdatum()));
+			h_abOrtList.add(iter.getAbflugsort().getCode());
+			h_anOrtList.add(iter.getAnkunftsort().getCode());
+		}
+
+		// Rueck-List operations
+		/*ArrayList<Flug> r_flugList = null;
+		if (hin_option.equals("H")) {
+			r_flugList = searchFlug(ankunft, abflug, r_datum, flugList);
+			for(Flug iter:r_flugList) {
+				r_flugnrList.add(iter.getFlugnr());
+				r_preisList.add(decf.format(iter.getSitzplatz().get(0).getPreis()));
+				r_freiplatzList.add(iter.anzahlFreiplatz());
+				r_abDatList.add(df.format(iter.getAbflugsdatum()));
+				r_anDatList.add(df.format(iter.getAnkunftsdatum()));
+				r_abOrtList.add(iter.getAbflugsort().getCode());
+				r_anOrtList.add(iter.getAnkunftsort().getCode());
+			}
+		}*/
+
+		request.setAttribute("h_flugnrList", h_flugnrList);
+		request.setAttribute("h_preisList", h_preisList);
+		request.setAttribute("h_freiplatzList", h_freiplatzList);
+		request.setAttribute("h_abDatList", h_abDatList);
+		request.setAttribute("h_anDatList", h_anDatList);
+		request.setAttribute("h_abOrtList", h_abOrtList);
+		request.setAttribute("h_anOrtList", h_anOrtList);
+
+		/*request.setAttribute("r_flugnrList", r_flugnrList);
+		request.setAttribute("r_preisList", r_preisList);
+		request.setAttribute("r_freiplatzList", r_freiplatzList);
+		request.setAttribute("r_abDatList", r_abDatList);
+		request.setAttribute("r_anDatList", r_anDatList);
+		request.setAttribute("r_abOrtList", r_abOrtList);
+		request.setAttribute("r_anOrtList", r_anOrtList);*/
+
+		/*
+		String sabflug = request.getParameter("Abflugort");
+		String sankunft = request.getParameter("Ankunftsort");
+		String sdatum = request.getParameter("Abflugdatum");
+
 		
 		ArrayList<String> sflugnrList = new ArrayList<>();
 		ArrayList<String> spreisList = new ArrayList<>();
@@ -44,7 +112,6 @@ public class FlugSucheServlet extends HttpServlet {
 		ArrayList<String> sanDatList = new ArrayList<>();
 		ArrayList<String> sabOrtList = new ArrayList<>();
 		ArrayList<String> sanOrtList = new ArrayList<>();
-		ArrayList<Flug> flugList=flugDAO.getFlugList();
 		
 		ArrayList<Flug> sflugListab= new ArrayList<>();
 		ArrayList<Flug> sflugListan=new ArrayList<>();
@@ -95,30 +162,7 @@ public class FlugSucheServlet extends HttpServlet {
 				 
 			 }
 		}
-		
-		/*for(Flug iter:sflugListab) {
-		if(sankunft!=null){
-			sflugnrListan.add(iter.getFlugnr());
-			spreisListan.add(decf.format(iter.getSitzplatz().get(0).getPreis()));
-			sfreiplatzListan.add(iter.anzahlFreiplatz());
-			sabDatListan.add(df.format(iter.getAbflugsdatum()));
-			sanDatListan.add(df.format(iter.getAnkunftsdatum()));
-			sabOrtListan.add(iter.getAbflugsort().getCode());
-			sanOrtListan.add(iter.getAnkunftsort().getCode());
-		}
-			
-		else{
-			sflugnrListan.add(iter.getFlugnr());
-			spreisListan.add(decf.format(iter.getSitzplatz().get(0).getPreis()));
-			sfreiplatzListan.add(iter.anzahlFreiplatz());
-			sabDatListan.add(df.format(iter.getAbflugsdatum()));
-			sanDatListan.add(df.format(iter.getAnkunftsdatum()));
-			sabOrtListan.add(iter.getAbflugsort().getCode());
-			sanOrtListan.add(iter.getAnkunftsort().getCode());
-		}
-			
-	}
-		*/
+
 		for(Flug iter:sflugListdat) {
 			sflugnrList.add(iter.getFlugnr());
 			spreisList.add(decf.format(iter.getSitzplatz().get(0).getPreis()));
@@ -141,29 +185,28 @@ public class FlugSucheServlet extends HttpServlet {
 		request.setAttribute("anDatList", sanDatList);
 		request.setAttribute("abOrtList", sabOrtList);
 		request.setAttribute("anOrtList", sanOrtList);
+		*/
 
-		
-		ss.invalidate();
 		request.getRequestDispatcher("/WEB-INF/classes/view/fluglist.jsp").include(request, response);
 		response.setContentType("text/html");
-	
-		
-	
-		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession ss = request.getSession();
-		 String sabflug = request.getParameter("Abflugort");
-	     String sankunft = request.getParameter("Ankunftsort");
-	     String sdatum=request.getParameter("Abflugdatum");
-	     
-	     ss.setAttribute("sabflug", sabflug);
-	     ss.setAttribute("sankunft", sankunft);
-	     ss.setAttribute("sdatum", sdatum);
-	     
-	     
-	     response.sendRedirect("suchen");
-			response.setContentType("text/html");
+		response.sendRedirect("suchen");
+		response.setContentType("text/html");
+	}
+
+	private ArrayList<Flug> searchFlug(String abflugort, String ankunftsort, String datum, ArrayList<Flug> fromList) {
+		ArrayList<Flug> searchList = new ArrayList<>();
+
+		for(Flug iter:fromList) {
+			if(iter.getAbflugsort().getCode().equals(abflugort)
+					&& iter.getAnkunftsort().getCode().equals(ankunftsort)
+					&& sdf.format(iter.getAbflugsdatum()).equals(datum)) {
+				searchList.add(iter);
+			}
+		}
+
+		return searchList;
 	}
 }

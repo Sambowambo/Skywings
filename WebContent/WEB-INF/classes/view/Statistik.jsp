@@ -65,10 +65,15 @@ String date2 = (String) request.getAttribute("date2");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/statistik.css">
     <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/font-awesome.min.css">
-    <script type="text/javascript" src="vendor/jquery/jquery.js"></script>
-    <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.js"></script>
+	  <script type="text/javascript" src="vendor/jquery/jquery.js"></script>
+	  <script type="text/javascript" src="vendor/jquery/jquery.autocomplete.min.js"></script>
+	  <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.js"></script>
+	  <script type="text/javascript" src="vendor/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+	  <script type="text/javascript" src="js/moment.js"></script>
+	<script type="text/javascript" src="js/flugmanagement-datetimepicker.js"></script>
     <title>Statistik</title>
 
     <!-- Bootstrap -->
@@ -168,12 +173,45 @@ String date2 = (String) request.getAttribute("date2");
 
 
 		<center>
-			<label for="username" id ="lable1" >Date 1: </label> 
-			<input type="date" value="2017-01-01" class="form-control" id="date1" name="date1" placeholder="yyyy-MM-dd"  >
+
+			<div class="row">
+				<div class="col-md-6">
+					<label for="date1" id ="lable1" >Date 1: </label>
+					<div class="form-group" style="margin-bottom:10px">
+						<div class="input-group date form_date" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1">
+							<input class="form-control" type="text" placeholder="yyyy-MM-dd" name="date1" id="date1" readonly>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+						</div>
+						<input type="hidden" id="dtp_input1" value="" />
+					</div>
+				</div>
+				<div class="col-md-6">
+					<label for="date2" id ="lable2" >Date 2: </label>
+					<div class="form-group" style="margin-bottom:10px">
+						<div class="input-group date form_date" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2">
+							<input class="form-control" type="text" placeholder="yyyy-MM-dd" name="date2" id="date2" readonly>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+						</div>
+						<input type="hidden" id="dtp_input2" value="" />
+					</div>
+				</div>
+			</div>
+
 			<br>
-			<label for="username" id ="lable1" >Date 2: </label> 
-			<input type="date" value="2017-01-01" class="form-control" id="date2" name="date2" placeholder="z.B.: 2017-12-12" >
-			<br>
+
+			<script type="text/javascript">
+                $('.form_date').datetimepicker({
+                    weekStart: 1,
+                    todayBtn:  0,
+                    autoclose: 1,
+                    todayHighlight: 1,
+                    startView: 4,
+                    minView: 2,
+                    forceParse: 0,
+                });
+			</script>
 		<button type="submit" class="btn btn-warning">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Go&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
 		<input type="button"  class="btn btn-warning" value='&nbsp;&nbsp;&nbsp;&nbsp;Reset&nbsp;
@@ -183,8 +221,6 @@ String date2 = (String) request.getAttribute("date2");
 	<br>
 	<div align="center" style="background:#fafafa; color:#222; padding:10px;">
 
-
-	</script>
 
 	<div id="g13">
 		<% if( avgPreis != null){ %>
@@ -298,5 +334,6 @@ String date2 = (String) request.getAttribute("date2");
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+
   </body>
 </html>

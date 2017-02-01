@@ -37,13 +37,13 @@
 	<body>
 		
 		<%
-		ArrayList<String> flugnrList = (ArrayList<String>)request.getAttribute("flugnrList");
-		ArrayList<Double> preisList = (ArrayList<Double>)request.getAttribute("preisList");
-		ArrayList<Integer> freiplatzList = (ArrayList<Integer>)request.getAttribute("freiplatzList");
-		ArrayList<String> abDatList = (ArrayList<String>)request.getAttribute("abDatList");
-		ArrayList<String> anDatList = (ArrayList<String>)request.getAttribute("anDatList");
-		ArrayList<String> abOrtList = (ArrayList<String>)request.getAttribute("abOrtList");
-		ArrayList<String> anOrtList = (ArrayList<String>)request.getAttribute("anOrtList");
+		ArrayList<String> flugnrList = (ArrayList<String>)request.getAttribute("h_flugnrList");
+		ArrayList<Double> preisList = (ArrayList<Double>)request.getAttribute("h_preisList");
+		ArrayList<Integer> freiplatzList = (ArrayList<Integer>)request.getAttribute("h_freiplatzList");
+		ArrayList<String> abDatList = (ArrayList<String>)request.getAttribute("h_abDatList");
+		ArrayList<String> anDatList = (ArrayList<String>)request.getAttribute("h_anDatList");
+		ArrayList<String> abOrtList = (ArrayList<String>)request.getAttribute("h_abOrtList");
+		ArrayList<String> anOrtList = (ArrayList<String>)request.getAttribute("h_anOrtList");
 		%>
 		<jsp:include page="navbar.jsp"></jsp:include>
 
@@ -51,7 +51,8 @@
 			<h1>Skywings Prototyp II</h1>
 			<p class="lead" style="margin-top:15px;">Alle Fluege sind hier zu buchen</p>
 		</div>
-		
+
+		<!--
 		<div class="container">
 			
 			<form method="POST" action="suchen">
@@ -79,6 +80,7 @@
 			</form>
 		
 		</div>
+		-->
 
 		<div class="container">
 			<form name="flugList-form">

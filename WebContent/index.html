@@ -5,9 +5,16 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap-datetimepicker.min.css">
+		<link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/index.css">
-		<script src="vendor/jquery/jquery.js"></script>
-		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="vendor/jquery/jquery.js"></script>
+		<script type="text/javascript" src="vendor/jquery/jquery.autocomplete.min.js"></script>
+		<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="vendor/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+		<script type="text/javascript" src="js/moment.js"></script>
+		<script type="text/javascript" src="js/flughafen-autocomplete.js"></script>
+		<script type="text/javascript" src="js/flugmanagement-datetimepicker.js"></script>
 	</head>
 
 	<body>
@@ -16,38 +23,130 @@
 			<p class="lead" style="margin-top:15px;">Beim 2. Prototyp von Skywings sind 4 Funktionen verfügbar.<br>
 				Flug Buchen und Flug Management.</p>
 		</div>
-		<div class="container">
-			<div class="row twin-col">
-				<div class="col-sm-6">
-					<img src="img/booking.jpg" class="img-circle" alt="Flug Buchen image" width="150" height="150">
-					<h2>Flug Buchen</h2>
-					<p>unter Flug Buchen , finden Sie alle eingetragenen Flüge von verschiedenen Fluggesellschaften. Wenn Ihnen eine Flug zusagt, können Sie diesen Flug buchen. Um Ihnen die Bedienung zu erleichtern, können Sie auch Flüge nach Ihren Vorstellungen auch suchen um Zeit zu sparen.</p>
-					<a href="flugliste" class="btn btn-success" role="button">Flug Buchen</a>
-				</div>
 
-				<div class="col-sm-6">
-					<img src="img/airline.jpg" class="img-circle" alt="Flug Management image" width="150" height="150">
-					<h2>Flug Management</h2>
-					<p>unter Flug Management können neue Flüge erstellt werden.Es besteht auch die Möglichkeit bereits vorhandene Flüge zu überarbeiten, oder diese zu Löschen. </p>
-					<a href="management" class="btn btn-success" role="button">Flug Management</a>
-				</div>
+		<!-- Navigation -->
+		<div class="navbar-wrapper">
+			<div class="container">
+
+				<nav class="navbar navbar-inverse navbar-static-top">
+					<div class="container">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand"><i class="fa fa-plane" aria-hidden="true"></i> Skywings</a>
+						</div>
+						<div id="navbar" class="navbar-collapse collapse">
+							<ul class="nav navbar-nav">
+								<li><a href="buchungansehen">Meine Buchung</a></li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right">
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Login<span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="management">Flug Management</a></li>
+										<li><a href="statistik">Statistik</a></li>
+										<!--
+										<li role="separator" class="divider"></li>
+										<li class="dropdown-header">Nav header</li>
+										-->
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+
 			</div>
+		</div>
+		<!-- /.Navigation -->
 
-			<div class="row twin-col">
-				<div class="col-sm-6">
-					<img src="img/buchung_ansehen.jpg" class="img-circle" alt="Buchung ansehen image" width="150" height="150">
-					<h2>Buchung ansehen</h2>
-					<p>wenn Sie bereits einen Flug gebucht haben, können Sie hier Ihre Buchung erneut ansehen.Falls Ihnen ein Fehler auffällt der Ihnen bei Ihrer Buchung unterlaufen ist, können Sie diesen hier ausbessern.</p>
-					<a href="buchungansehen" class="btn btn-success" role="button">Buchung ansehen</a>
+		<div class="container content-index">
+			<form method="GET" action="suchen">
+				<div class="row" style="padding-top: 45px; padding-bottom: 45px;">
+					<div class="col-md-8 col-md-offset-2">
+						<div class="container">
+							<!--
+							<div class="row">
+								<div class="col-md-4">
+									<label><input type="radio" id="einflug" name="hr_flug" onClick="check_flug_typ()" value="E" checked> Einfacher Flug</label>
+								</div>
+								<div class="col-md-4">
+									<label><input type="radio" id="hr_flug" name="hr_flug" onClick="check_flug_typ()" value="H"> Hin-&Rueckflug</label>
+								</div>
+								<script type="text/javascript">
+									function check_flug_typ() {
+									    if(document.getElementById('einflug').checked) {
+									        document.getElementById('rueck_dat_form').style.display = "none";
+                                            document.getElementById('rueck_datum').required = false;
+										} else {
+                                            document.getElementById('rueck_dat_form').style.display = "initial";
+                                            document.getElementById('rueck_datum').required = true;
+										}
+									}
+								</script>
+							</div>
+							<br>
+							-->
+							<div class="row">
+								<div class="col-md-4">
+									<label for="ab_ort">Von: </label>
+									<input type="text" id="ab_ort" name="Abflugort" class="form-control" placeholder="Abflugort zB Wien" required>
+								</div>
+								<div class="col-md-4">
+									<label for="an_ort">Nach: </label>
+									<input type="text" id="an_ort" name="Ankunftsort" class="form-control" placeholder="Ankunftsort zB London" required>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-4">
+									<label for="ab_ort">Hinflug: </label>
+									<div class="form-group" style="margin-bottom:10px">
+										<div class="input-group date form_date" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1">
+											<input class="form-control" type="text" placeholder="Hinflugsdatum" name="hin_datum" required>
+											<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+											<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+										</div>
+										<input type="hidden" id="dtp_input1" value="" />
+									</div>
+								</div>
+								<div class="col-md-4" id="rueck_dat_form" style="display: none;">
+									<label for="an_ort">Rueckflug: </label>
+									<div class="form-group" style="margin-bottom:10px">
+										<div class="input-group date form_date" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2">
+											<input class="form-control" type="text" placeholder="Rueckflugsdatum" name="rueck_datum" id="rueck_datum">
+											<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+											<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+										</div>
+										<input type="hidden" id="dtp_input2" value="" />
+									</div>
+								</div>
+								<script type="text/javascript">
+                                    $('.form_date').datetimepicker({
+                                        weekStart: 1,
+                                        todayBtn:  0,
+                                        autoclose: 1,
+                                        todayHighlight: 1,
+                                        startView: 4,
+                                        startDate: '+0d',
+                                        minView: 2,
+                                        forceParse: 0,
+                                    });
+								</script>
+								<div class="row" style="margin-top: 100px;">
+									<div class="col-md-2 col-md-offset-6">
+										<button type="submit" class="btn btn-info btn-block">Fluege Suchen</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-
-				<div class="col-sm-6">
-					<img src="img/statistik.jpg" class="img-circle" alt="Statistik image" width="150" height="150">
-					<h2>Statistik erstellen</h2>
-					<p>unter Statistik erstellen kann man sinnvolle Statistiken mittels einer Optionauswahl und des Dateneingebens abrufen</p>
-					<a href="statistik" class="btn btn-success" role="button">Statistik ansehen</a>
-				</div>
-			</div>
+			</form>
 		</div>
 	</body>
 </html>
